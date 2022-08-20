@@ -1,9 +1,4 @@
-export const iconTypes = [
-  'large',
-  'normal',
-  'small',
-  'mini'
-] as const
+export const iconTypes = ['large', 'normal', 'small', 'mini'] as const
 
 export const buttonProps = {
   size: {
