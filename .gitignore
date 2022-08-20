@@ -1,0 +1,10 @@
+*.global.js
+*.global.js.map
+.DS_Store
+node_modules
+coverage
+temp
+explorations
+TODOs.md
+*.log
+.idea

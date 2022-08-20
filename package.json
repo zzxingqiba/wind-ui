@@ -1,0 +1,24 @@
+{
+  "name": "wind-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm -C play dev"
+  },
+  "keywords": [
+    "wind-ui"
+  ],
+  "author": "1BBA09B7.png",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.54.5",
+    "typescript": "^4.7.4",
+    "vue": "^3.2.36"
+  },
+  "dependencies": {
+    "@wind/components": "workspace:^1.0.0",
+    "@wind/theme-chalk": "workspace:^1.0.0",
+    "@wind/utils": "workspace:^1.0.0"
+  }
+}
