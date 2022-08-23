@@ -31,9 +31,10 @@
     "vue": "^3.2.36"
   },
   "dependencies": {
-    "@wind/components": "workspace:^1.0.0",
-    "@wind/theme-chalk": "workspace:^1.0.0",
-    "@wind/utils": "workspace:^1.0.0"
+    "@wind/components": "workspace:*",
+    "@wind/hooks": "workspace:*",
+    "@wind/theme-chalk": "workspace:*",
+    "@wind/utils": "workspace:*"
   },
   "lint-staged": {
     "*.{vue,js,ts}": "eslint --fix"
