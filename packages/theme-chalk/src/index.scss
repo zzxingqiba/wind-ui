@@ -1,5 +1,5 @@
-// root 
-@use './root/var.scss';
+// root
+@use './base.scss';
 // components style
-@use 'button.scss';
-@use 'icon.scss';
+@use './button.scss';
+@use './icon.scss';

@@ -1,5 +1,5 @@
 <template>
-  <button :class="[ns.b()]">
+  <button :class="[ns.b(), ns.is('bold', bold)]">
     <span v-if="$slots.default"><slot /></span>
   </button>
 </template>
@@ -12,11 +12,11 @@ export default defineComponent({
   name: 'WdButton',
   props: buttonProps,
   setup(props) {
-    const _type = computed(() => props.type ?? '')
+    const _bold = computed(() => props.bold ?? '')
     const ns = useNamespace('button')
     return {
       ns,
-      type: _type,
+      bold: _bold,
     }
   },
 })

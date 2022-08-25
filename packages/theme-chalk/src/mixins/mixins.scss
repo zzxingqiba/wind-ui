@@ -1,10 +1,20 @@
 // 声明公共sass方法
 @use 'config' as *;
 @forward 'config';
+@forward '_function-var';
+@forward 'function';
 
 @mixin b($block) {
   $B: $namespace + '-' + $block !global;
   .#{$B}{
     @content
   }
-}
+};
+
+@mixin when($state) {
+  @at-root {
+    .#{$state-prefix + $state} {
+      @content;
+    }
+  }
+};

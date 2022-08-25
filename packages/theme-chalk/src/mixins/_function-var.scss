@@ -1,4 +1,4 @@
-@use './function.scss';
+@use './function.scss' as *;
 
 
 @mixin set-css-var-value($name, $value) {
@@ -9,9 +9,9 @@
 @mixin set-component-css-var($name, $variables) {
   @each $attribute, $value in $variables {
     @if $attribute == 'default' {
-      #{getCssVar($name)}: #{$value};
+      #{getCssVarName($name)}: #{$value};
     } @else {
-      #{getCssVar($name, $attribute)}: #{$value};
+      #{getCssVarName($name, $attribute)}: #{$value};
     }
   }
 }

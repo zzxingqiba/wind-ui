@@ -1,4 +1,8 @@
-@import '../mixins/_function-var';
+@use '../mixins/function-var' as *;
 :root{
-  @include set-css-var-value('font-weight-normal', 500);
+  // font-weight
+  @include set-css-var-value('font-weight-normal', 500); // --w-font-weight-normal
+  @include set-css-var-value('font-weight-bold', 600); // --w-font-weight-bold
+
+
 }

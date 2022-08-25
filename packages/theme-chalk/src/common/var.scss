@@ -5,9 +5,10 @@
 $button: () !default;
 $button: map.merge(
   (
-    'font-weight': getCssVar('font-weight-normal'),
+    'font-weight-normal': getCssVar('font-weight', 'normal'),
+    'font-weight-bold': getCssVar('font-weight', 'bold'),
   ),
   $button
 )
-  
+
 

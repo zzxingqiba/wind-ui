@@ -1,6 +1,7 @@
 import { computed, unref } from 'vue'
 
 export const defaultNamespace = 'w'
+const statePrefix = 'is-'
 
 // B__E--M
 const _bem = (
@@ -74,6 +75,9 @@ export const useNamespace = (block: string) => {
   const cssVarBlockName = (name: string) =>
     `--${namespace.value}-${block}_${name}`
 
+  const is = (name: string, state: boolean): string =>
+    state ? `${statePrefix}${name}` : ''
+
   return {
     namespace,
     b,
@@ -83,6 +87,7 @@ export const useNamespace = (block: string) => {
     em,
     bm,
     bem,
+    is,
     cssVar,
     cssVarBlock,
     cssVarName,
