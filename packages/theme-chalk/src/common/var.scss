@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use '../mixins/function.scss' as *;
+
+// Button
+$button: () !default;
+$button: map.merge(
+  (
+    'font-weight': getCssVar('font-weight-normal'),
+  ),
+  $button
+)
+  
+

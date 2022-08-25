@@ -26,8 +26,6 @@ const _bem = (
 export const useNamespace = (block: string) => {
   const namespace = computed(() => defaultNamespace)
 
-  const baseName = () => _bem(unref(namespace), block, '', '', '')
-
   const b = (blockSuffix = '') =>
     _bem(unref(namespace), block, blockSuffix, '', '')
   const e = (element?: string) =>
@@ -50,9 +48,34 @@ export const useNamespace = (block: string) => {
     blockSuffix && element && modifier
       ? _bem(unref(namespace), block, blockSuffix, element, modifier)
       : ''
-  // for css var
-  // --w_xxx: value;
+
+  // --w_xxx;
+  const cssVar = (object: Record<string, string>) => {
+    const cssVarMap: Record<string, string> = {}
+    for (const key in object) {
+      cssVarMap[`--${namespace.value}_${key}`] = object[key]
+    }
+    return cssVarMap
+  }
+
+  // --w-block_xxx
+  const cssVarBlock = (object: Record<string, string>) => {
+    const cssVarMap: Record<string, string> = {}
+    for (const key in object) {
+      cssVarMap[`--${namespace.value}-${block}_${key}`] = object[key]
+    }
+    return cssVarMap
+  }
+
+  // --w-xxx
+  const cssVarName = (name: string) => `--${namespace.value}_${name}`
+
+  // --w-block_xxx
+  const cssVarBlockName = (name: string) =>
+    `--${namespace.value}-${block}_${name}`
+
   return {
+    namespace,
     b,
     e,
     m,
@@ -60,5 +83,9 @@ export const useNamespace = (block: string) => {
     em,
     bm,
     bem,
+    cssVar,
+    cssVarBlock,
+    cssVarName,
+    cssVarBlockName,
   }
 }

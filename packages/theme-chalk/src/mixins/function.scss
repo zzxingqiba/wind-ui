@@ -1,0 +1,17 @@
+@use 'config';
+
+// joinVarName(('button', 'text-color')) => '--w-button-text-color'
+// joinVarName(('font-weight-normal')) => '--w-font-weight-normal'
+@function joinVarName($list) {
+  $name: '--' + config.$namespace;
+  @each $item in $list {
+    @if $item != '' {
+      $name: $name + '-' + $item;
+    }
+  }
+  @return $name;
+}
+
+@function getCssVar($args...) {
+  @return var(#{joinVarName($args)});
+}

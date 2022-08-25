@@ -1,0 +1,11 @@
+@use 'common/var' as *;
+@use 'mixins/mixins' as *;
+@use 'mixins/_function-var' as *;
+
+@include b(button) {
+  @include set-component-css-var('button', $button);
+}
+
+@include b(button){
+  font-weight: getCssVar('button', 'font-weight');
+}
