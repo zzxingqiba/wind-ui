@@ -1,10 +1,10 @@
 <template>
-  <wd-button :bold="bold">
-    <template #default>测试</template>
-    <template #right-icon>
-      <i class="wind-icon-caomei" />
-    </template>
-  </wd-button>
+  <wd-button style="margin-left: 10px">normal</wd-button>
+  <wd-button style="margin-left: 10px" type="primary">primary</wd-button>
+  <wd-button style="margin-left: 10px" type="info">info</wd-button>
+  <wd-button style="margin-left: 10px" type="success">success</wd-button>
+  <wd-button style="margin-left: 10px" type="warning">warning</wd-button>
+  <wd-button style="margin-left: 10px" type="error">error</wd-button>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

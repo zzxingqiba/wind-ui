@@ -1,8 +1,25 @@
 @use '../mixins/function-var' as *;
+@use '../common/var' as *;
+@use '../mixins/function' as *;
 :root{
   // font-weight
-  @include set-css-var-value('font-weight-normal', 500); // --w-font-weight-normal
-  @include set-css-var-value('font-weight-bold', 600); // --w-font-weight-bold
+  @include set-component-css-var('font-weight',  $font-weight);
+  // text-color
+  @include set-component-css-var('text-color',  $text-color);
 
+  // border
+  @include set-css-var-value('border-width', $border-width);
+  @include set-css-var-value('border-style', $border-style);
+  @include set-component-css-var('border-color', $border-color);
+  @include set-component-css-var('border-radius', $border-radius);
+  @include set-css-var-value(
+    'border',
+    getCssVar('border-width') getCssVar('border-style')
+    getCssVar('border-color')
+  );
+}
 
+// light
+:root {
+  @include set-css-var-value('color-white', $color-white);
 }

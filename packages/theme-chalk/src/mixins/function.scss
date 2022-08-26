@@ -19,3 +19,7 @@
 @function getCssVarName($args...) {
   @return #{joinVarName($args)};
 }
+
+@function getGlobalVar($args...){
+  @return var(#{joinVarName($args)});
+}

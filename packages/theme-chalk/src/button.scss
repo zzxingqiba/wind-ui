@@ -17,12 +17,50 @@
   user-select: none;
   vertical-align: middle;
   -webkit-appearance: none;
+  transition: 0.1s;
+  border: getGlobalVar('border');
+  border-color: getGlobalVar('border-color');
+  font-weight: getGlobalVar('font-weight');
+  color: getGlobalVar('text-color');
+  border-radius: getGlobalVar('border-radius', 'base');
+  padding: getCssVar('button', 'padding', 'base');
 
-  font-weight: getCssVar('button', 'font-weight', 'normal');
+  &:hover,
+  &:focus {
+    
+  }
+  
+  @include m(primary){
+    color: $color-white;
+    background-color: $color-primary;
+    border-color: transparent;
+  }
 
+  @include m(info){
+    color: $color-white;
+    background-color: $color-info;
+    border-color: transparent;;
+  }
 
-}
+  @include m(success){
+    color: $color-white;
+    background-color: $color-success;
+    border-color: transparent;
+  }
 
-@include when(bold){
-  font-weight: getCssVar('button', 'font-weight', 'bold');
+  @include m(warning){
+    color: $color-white;
+    background-color: $color-warning;
+    border-color: transparent;
+  }
+
+  @include m(error){
+    color: $color-white;
+    background-color: $color-error;
+    border-color: transparent;
+  }
+
+  @include when(bold){
+    font-weight: getCssVar('button', 'font-weight', 'bold');
+  }
 }

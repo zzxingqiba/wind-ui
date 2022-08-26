@@ -1,5 +1,5 @@
 <template>
-  <button :class="[ns.b(), ns.is('bold', bold)]">
+  <button :class="[ns.b(), ns.m(type), ns.is('bold', bold)]">
     <span v-if="$slots.default"><slot /></span>
   </button>
 </template>
@@ -13,10 +13,12 @@ export default defineComponent({
   props: buttonProps,
   setup(props) {
     const _bold = computed(() => props.bold ?? '')
+    const _type = computed(() => props.type ?? '')
     const ns = useNamespace('button')
     return {
       ns,
       bold: _bold,
+      type: _type,
     }
   },
 })
