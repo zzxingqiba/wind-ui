@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-     "outDir": "dist",
+    "outDir": "dist",
     "target": "es2018",
     "module": "esnext",
     "baseUrl": ".",
@@ -10,11 +10,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "resolveJsonModule": true,
+    "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "removeComments": false,
     "rootDir": ".",
-    "types": [],
+    "types": []
   },
   "exclude": ["node_modules"]
 }

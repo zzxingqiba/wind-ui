@@ -15,8 +15,9 @@
   "author": "1BBA09B7.png",
   "license": "ISC",
   "devDependencies": {
-    "@commitlint/cli": "^17.0.3",
+    "@commitlint/cli": "^17.1.1",
     "@commitlint/config-conventional": "^17.0.3",
+    "@types/node": "*",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
     "eslint": "^8.22.0",
@@ -27,6 +28,7 @@
     "husky": "^8.0.0",
     "prettier": "^2.7.1",
     "sass": "^1.54.5",
+    "ts-node": ">=10.0.0",
     "typescript": "^4.7.4",
     "vue": "^3.2.36"
   },

@@ -21,15 +21,12 @@ export const buttonProps = {
   },
   bold: {
     type: Boolean,
-    default: false,
   },
   round: {
     type: Boolean,
-    default: false,
   },
   circle: {
     type: Boolean,
-    default: false,
   },
   icon: {
     type: String,
@@ -39,6 +36,22 @@ export const buttonProps = {
     values: buttonTypes,
     default: 'normal',
   },
+  plain: {
+    type: Boolean,
+  },
+  dashed: {
+    type: Boolean,
+  },
+  text: {
+    type: Boolean,
+  },
+  disabled: {
+    type: Boolean,
+  },
 } as const
+
+export const buttonEmits = {
+  click: (evt: MouseEvent) => evt instanceof MouseEvent,
+}
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>

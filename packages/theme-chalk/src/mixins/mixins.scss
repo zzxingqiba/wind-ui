@@ -6,10 +6,10 @@
 
 @mixin b($block) {
   $B: $namespace + '-' + $block !global;
-  .#{$B}{
-    @content
+  .#{$B} {
+    @content;
   }
-};
+}
 
 @mixin m($modifier) {
   $selector: &;
@@ -28,4 +28,4 @@
       @content;
     }
   }
-};
+} ;

@@ -33,12 +33,7 @@
   </div>
 
   <div style="margin: 10px 0">
-    <wd-button
-      style="margin-left: 10px"
-      icon="xiasanjiao"
-      circle
-      size="mini"
-    ></wd-button>
+    <wd-button style="margin-left: 10px" icon="xiasanjiao" circle size="mini" />
     <wd-button
       style="margin-left: 10px"
       icon="xiasanjiao"
@@ -70,9 +65,145 @@
 
   <div style="margin: 10px 0">
     <wd-button style="margin-left: 10px" size="mini">小小</wd-button>
-    <wd-button style="margin-left: 10px" size="small">小了</wd-button>
-    <wd-button style="margin-left: 10px" size="normal">不小</wd-button>
-    <wd-button style="margin-left: 10px" size="large">不小了</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" size="small"
+      >小了</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" size="normal"
+      >不小</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" size="large"
+      >不小了</wd-button
+    >
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" plain>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" plain
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" plain>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" plain
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" plain
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" plain>Error</wd-button>
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" dashed>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" dashed
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" dashed>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" dashed
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" dashed
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" dashed>Error</wd-button>
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" text>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" text>Primary</wd-button>
+    <wd-button style="margin-left: 10px" type="info" text>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" text>Success</wd-button>
+    <wd-button style="margin-left: 10px" type="warning" text>Warning</wd-button>
+    <wd-button style="margin-left: 10px" type="error" text>Error</wd-button>
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" text disabled>Normal</wd-button>
+    <wd-button style="margin-left: 10px" text type="primary" disabled
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" text disabled
+      >Info</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" text disabled
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" text disabled
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" text disabled
+      >Error</wd-button
+    >
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" disabled plain>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" disabled plain
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" disabled plain
+      >Info</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" disabled plain
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" disabled plain
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" disabled plain
+      >Error</wd-button
+    >
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" disabled>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" disabled
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" disabled>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" disabled
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" disabled
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" disabled>Error</wd-button>
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" disabled dashed>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" disabled dashed
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" disabled dashed
+      >Info</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" disabled dashed
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" disabled dashed
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" disabled dashed
+      >Error</wd-button
+    >
+  </div>
+
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" icon="caomei">Normal</wd-button>
+    <wd-button style="margin-left: 10px" icon="caomei" type="primary"
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="info"
+      >Normal</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="success"
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="warning"
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="error"
+      >Error</wd-button
+    >
   </div>
 </template>
 <script lang="ts">
