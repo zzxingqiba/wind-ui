@@ -1,0 +1,45 @@
+@use 'root/light' as *;
+@use 'mixins/mixins' as *;
+
+
+@include b(button-base-wave){
+  @include set-component-css-var('button', 'base-wave', $bezier);
+  @include set-component-css-var('button', 'base-wave-color', $color-primary);
+
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  animation-iteration-count: 1;
+  animation-duration: 0.6s;
+  animation-timing-function: getCssVar('button', 'base-wave'), getCssVar('button', 'base-wave');
+
+
+  &--active{
+    z-index: 1;
+    animation-name: button-wave-spread, button-wave-opacity;
+  }
+
+  @keyframes button-wave-spread {
+    from {
+      box-shadow: 0 0 0.5px 0 getCssVar('button', 'base-wave-color')
+    }
+    to {
+      box-shadow: 0 0 0.5px 4.5px getCssVar('button', 'base-wave-color')
+    }
+  }
+
+
+
+  @keyframes button-wave-opacity {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}

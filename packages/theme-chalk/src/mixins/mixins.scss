@@ -13,7 +13,7 @@
 
 @mixin m($modifier) {
   $selector: &;
-  $currentSelector: $selector + $modifier-separator + $modifier;
+  $currentSelector: $selector + $modifier-separator + $modifier + ',';
 
   @at-root {
     #{$currentSelector} {
@@ -24,7 +24,7 @@
 
 @mixin when($state) {
   @at-root {
-    .#{$state-prefix + $state} {
+    &.#{$state-prefix + $state} {
       @content;
     }
   }
