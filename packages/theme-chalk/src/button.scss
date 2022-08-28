@@ -1,56 +1,19 @@
-@use 'root/light' as *;
+@use 'root/var' as *;
 @use 'mixins/mixins' as *;
 
 @include b(button) {
-  @include set-component-css-vars('button', $font-size);
-  @include set-component-css-vars('button', $font-weight);
-  @include set-component-css-vars('button', $border-radius);
-  @include set-component-css-vars('button', $spacing);
-  @include set-component-css-vars('button', $border-style);
+  @include set-component-css-var('button', $button);
 }
 
 @include b(button) {
-  @include set-component-css-var('button', 'border', $border);
-  @include set-component-css-var('button', 'text-color-base', $text-color-base);
-  @include set-component-css-var('button', 'color-white', $color-white);
-  @include set-component-css-var('button', 'color-black', $color-black);
-  @include set-component-css-var('button', 'color-primary', $color-primary);
-  @include set-component-css-var(
-    'button',
-    'color-primary-light-1',
-    $color-primary-light-1
-  );
-  @include set-component-css-var(
-    'button',
-    'color-primary-light-2',
-    $color-primary-light-2
-  );
-  @include set-component-css-var(
-    'button',
-    'color-primary-light-3',
-    $color-primary-light-3
-  );
-  @include set-component-css-var(
-    'button',
-    'color-primary-dark-1',
-    $color-primary-dark-1
-  );
-  @include set-component-css-var(
-    'button',
-    'color-primary-dark-2',
-    $color-primary-dark-2
-  );
-  @include set-component-css-var(
-    'button',
-    'background-color-gray',
-    $color-gray-bg
-  );
-  @include set-component-css-var(
-    'button',
-    'color-disabled',
-    $color-primary-dark-2
-  );
+  @each $type in (primary, success, warning, error, info) {
+    @include m($type) {
+      @include button-var($type)
+    }
+  }
+}
 
+@include b(button) {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -66,53 +29,54 @@
   transition: 0.1s;
   cursor: pointer;
   background-color: transparent;
-  border: getCssVar('button', 'border');
-  font-size: getCssVar('button', 'font-size', 'normal');
-  font-weight: getCssVar('button', 'font-weight', 'base');
-  color: getCssVar('button', 'text-color', 'base');
-  border-radius: getCssVar('button', 'border-radius', 'base');
-  padding: getCssVar('button', 'spacing', 'normal')
-    getCssVar('button', 'spacing', 'large');
+  border: getCssVar('border');
+  border-color: getCssVar('button', 'border-color');
+  font-size: getCssVar('font-size', 'normal');
+  font-weight: getCssVar('font-weight', 'normal');
+  color: getCssVar('button', 'text-color');
+  border-radius: getCssVar('border-radius', 'base');
+  padding: getCssVar('spacing', 'normal')
+    getCssVar('spacing', 'large');
 
   &:hover,
   &:focus {
-    color: getCssVar('button', 'color-primary');
-    border-color: getCssVar('button', 'color-primary', 'light', '1');
+    color: getCssVar('button', 'hover', 'text-color');
+    border-color: getCssVar('button', 'hover', 'border-color');
     outline: none;
   }
 
   &:active {
-    color: getCssVar('button', 'color-primary');
-    border-color: getCssVar('button', 'color-primary');
+    color: getCssVar('button', 'active' 'text-color');
+    border-color: getCssVar('button', 'active', 'border-color');
   }
 
   > span {
     display: inline-flex;
     align-items: center;
     & + [class^=#{$namespace + $common-separator + 'icon'}] {
-      margin-left: getCssVar('button', 'spacing', 'small');
+      margin-left: getCssVar('spacing', 'small');
     }
   }
 
   @include b(button-base-wave) {
-    @include set-component-css-var('button', 'base-wave-color', $color-primary);
+    @include  set-css-var-value('base-wave-color', getCssVar('color-primary'))
   }
 
   @include when(bold) {
-    font-weight: getCssVar('button', 'font-weight', 'bold');
+    font-weight: getCssVar('font-weight', 'bold');
   }
 
   @include when(round) {
-    border-radius: getCssVar('button', 'border-radius', 'round');
+    border-radius: getCssVar('border-radius', 'round');
   }
 
   @include when(circle) {
-    border-radius: getCssVar('button', 'border-radius', 'circle');
-    padding: getCssVar('button', 'spacing', 'normal');
+    border-radius: getCssVar('border-radius', 'circle');
+    padding: getCssVar('spacing', 'normal');
   }
 
   @include when(dashed) {
-    border-style: getCssVar('button', 'border-style', 'dashed');
+    border-style: getCssVar('border-style', 'dashed');
   }
 
   @include when(text) {
@@ -121,10 +85,10 @@
     &:hover,
     &:focus,
     &:active {
-      background-color: getCssVar('button', 'background-color', gray);
+      color: getCssVar('button', 'text-color');
+      background-color: getCssVar('color-gray-bg');
     }
     @include when(disabled) {
-      background-color: transparent;
       &,
       &:hover,
       &:focus {
@@ -134,323 +98,133 @@
   }
 
   @include when(disabled) {
-    background-color: transparent;
-    color: getCssVar('button', 'background-color', gray);
+    background-color: getCssVar('button', 'disabled', 'bg-color');
+    color: getCssVar('button', 'disabled', 'text-color',);
     &,
     &:hover,
     &:focus {
       cursor: not-allowed;
       background-image: none;
-      border-color: getCssVar('button', 'background-color', gray);
+      border-color: getCssVar('button', 'disabled', 'border-color');
       background-color: transparent;
-      color: getCssVar('button', 'background-color', gray);
-    }
-  }
-
-  @include m(primary) {
-    color: getCssVar('button', 'color-white');
-    background-color: getCssVar('button', 'color-primary');
-    border-color: transparent;
-
-    @include b(button-base-wave) {
-      @include set-component-css-var(
-        'button',
-        'base-wave-color',
-        $color-primary
-      );
-    }
-  }
-
-  @include m(info) {
-    @include set-component-css-var('button', 'color-info', $color-info);
-    @include set-component-css-var(
-      'button',
-      'color-info-light-1',
-      $color-info-light-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-info-light-2',
-      $color-info-light-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-info-light-3',
-      $color-info-light-3
-    );
-    @include set-component-css-var(
-      'button',
-      'color-info-dark-1',
-      $color-info-dark-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-info-dark-2',
-      $color-info-dark-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-disabled',
-      $color-info-dark-2
-    );
-
-    @include b(button-base-wave) {
-      @include set-component-css-var('button', 'base-wave-color', $color-info);
-    }
-  }
-
-  @include m(success) {
-    @include set-component-css-var('button', 'color-success', $color-success);
-    @include set-component-css-var(
-      'button',
-      'color-success-light-1',
-      $color-success-light-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-success-light-2',
-      $color-success-light-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-success-light-3',
-      $color-success-light-3
-    );
-    @include set-component-css-var(
-      'button',
-      'color-success-dark-1',
-      $color-success-dark-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-success-dark-2',
-      $color-success-dark-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-disabled',
-      $color-success-dark-2
-    );
-
-    @include b(button-base-wave) {
-      @include set-component-css-var(
-        'button',
-        'base-wave-color',
-        $color-success
-      );
-    }
-  }
-
-  @include m(warning) {
-    @include set-component-css-var('button', 'color-warning', $color-warning);
-    @include set-component-css-var(
-      'button',
-      'color-warning-light-1',
-      $color-warning-light-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-warning-light-2',
-      $color-warning-light-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-warning-light-3',
-      $color-warning-light-3
-    );
-    @include set-component-css-var(
-      'button',
-      'color-warning-dark-1',
-      $color-warning-dark-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-warning-dark-2',
-      $color-warning-dark-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-disabled',
-      $color-warning-dark-2
-    );
-
-    @include b(button-base-wave) {
-      @include set-component-css-var(
-        'button',
-        'base-wave-color',
-        $color-warning
-      );
-    }
-  }
-
-  @include m(error) {
-    @include set-component-css-var('button', 'color-error', $color-error);
-    @include set-component-css-var(
-      'button',
-      'color-error-light-1',
-      $color-error-light-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-error-light-2',
-      $color-error-light-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-error-light-3',
-      $color-error-light-3
-    );
-    @include set-component-css-var(
-      'button',
-      'color-error-dark-1',
-      $color-error-dark-1
-    );
-    @include set-component-css-var(
-      'button',
-      'color-error-dark-2',
-      $color-error-dark-2
-    );
-    @include set-component-css-var(
-      'button',
-      'color-disabled',
-      $color-error-dark-2
-    );
-
-    @include b(button-base-wave) {
-      @include set-component-css-var('button', 'base-wave-color', $color-error);
-    }
-  }
-
-  @each $type in (primary, info, error, success, warning) {
-    @include m($type) {
-      color: getCssVar('button', 'color-white');
-      background-color: getCssVar('button', #{color-#{$type}});
-      border-color: transparent;
-      &:hover,
-      &:focus {
-        color: getCssVar('button', 'color-white');
-        border-color: getCssVar('button', #{color-#{$type}}, 'light', '1');
-        background-color: getCssVar('button', #{color-#{$type}}, 'light', '1');
-        outline: none;
-      }
-      &:active {
-        border-color: getCssVar('button', #{color-#{$type}}, 'dark', '1');
-        background-color: getCssVar('button', #{color-#{$type}}, 'dark', '1');
-      }
-
-      @include when(plain) {
-        background-color: getCssVar('button', #{color-#{$type}}, 'light', '2');
-        color: getCssVar('button', #{color-#{$type}});
-        &:hover,
-        &:focus {
-          border-color: getCssVar('button', #{color-#{$type}}, 'light', '2');
-          background-color: getCssVar('button', #{color-#{$type}}, 'dark', '2');
-        }
-        &:active {
-          border-color: getCssVar('button', #{color-#{$type}}, 'light', '2');
-          background-color: getCssVar(
-            'button',
-            #{color-#{$type}},
-            'light',
-            '2'
-          );
-        }
-        @include when(disabled) {
-          border-color: transparent;
-          background-color: getCssVar(
-            'button',
-            #{color-#{$type}},
-            'light',
-            '3'
-          );
-          color: getCssVar('button', #{color-#{$type}}, 'dark', '2');
-          &,
-          &:hover,
-          &:focus {
-            border-color: transparent;
-            background-color: getCssVar(
-              'button',
-              #{color-#{$type}},
-              'light',
-              '3'
-            );
-            color: getCssVar('button', #{color-#{$type}}, 'dark', '2');
-          }
-        }
-      }
-
-      @include when(dashed) {
-        color: getCssVar('button', 'color', $type);
-        border-style: getCssVar('button', 'border-style', 'dashed');
-        border-color: getCssVar('button', 'color', $type);
-        background-color: transparent;
-        &:hover,
-        &:focus {
-          border-color: getCssVar('button', 'color', $type, 'light', '2');
-        }
-        @include when(disabled) {
-          background-color: transparent;
-          color: getCssVar('button', 'color', $type, 'dark', '2');
-          &,
-          &:hover,
-          &:focus {
-            background-color: transparent;
-            color: getCssVar('button', 'color', $type, 'dark', '2');
-          }
-        }
-      }
-      @include when(text) {
-        color: getCssVar('button', 'color', $type);
-        background-color: transparent;
-        border: none;
-        &:hover,
-        &:focus,
-        &:active {
-          background-color: getCssVar('button', 'background-color', gray);
-        }
-        @include when(disabled) {
-          background-color: transparent;
-          color: getCssVar('button', 'color', $type, 'dark', '2');
-          &,
-          &:hover,
-          &:focus {
-            background-color: transparent;
-            color: getCssVar('button', 'color', $type, 'dark', '2');
-          }
-        }
-      }
-      @include when(disabled) {
-        background-color: getCssVar('button', 'color-disabled');
-        color: getCssVar('button', 'color-white');
-        border-color: getCssVar('button', 'color-disabled');
-        &,
-        &:hover,
-        &:focus {
-          border-color: getCssVar('button', 'color-disabled');
-          background-color: getCssVar('button', 'color-disabled');
-          color: getCssVar('button', 'color-white');
-        }
-      }
+      color: getCssVar('button', 'disabled', 'text-color');
     }
   }
 
   @each $size in (mini, small, large) {
     @include m($size) {
-      font-size: getCssVar('button', 'font-size', $size);
+      font-size: getCssVar('font-size', 'normal');
       @if $size == mini {
-        padding: getCssVar('button', 'spacing', 'mini')
-          getCssVar('button', 'spacing', 'mini');
+        padding: getCssVar('spacing', 'mini')
+          getCssVar('spacing', 'mini');
       }
       @if $size == small {
-        padding: getCssVar('button', 'spacing', 'small')
-          getCssVar('button', 'spacing', 'small');
+        padding: getCssVar('spacing', 'small')
+          getCssVar('spacing', 'small');
       }
       @if $size == large {
-        padding: getCssVar('button', 'spacing', 'normal')
-          getCssVar('button', 'spacing', 'large');
+        padding: getCssVar('spacing', 'normal')
+          getCssVar('spacing', 'large');
       }
       @include when(circle) {
-        padding: getCssVar('button', 'spacing', $size);
+        padding: getCssVar('spacing', $size);
+      }
+    }
+  }
+
+  @each $type in (primary, info, error, success, warning) {
+    @include m($type) {
+      color: getCssVar('button', 'text-color');
+      background-color: getCssVar('button', 'bg-color');
+      border-color: transparent;
+      &:hover,
+      &:focus {
+        color: getCssVar('button', 'hover', 'text-color');
+        border-color: getCssVar('button', 'hover', 'border-color');
+        background-color: getCssVar('button', 'hover', 'bg-color');
+        outline: none;
+      }
+      &:active {
+        border-color: getCssVar('button', 'active', 'border-color');
+        background-color: getCssVar('button', 'active', 'bg-color');
+      }
+
+      @include b(button-base-wave) {
+        @include  set-css-var-value('base-wave-color', getCssVar('color', $type))
+      }
+
+      @include when(plain) {
+        background-color: getCssVar('color', $type, 'light-2');
+        color: getCssVar('color', $type);
+        &:hover,
+        &:focus {
+          background-color: getCssVar('color', $type);
+          color: getCssVar('color-white');
+        }
+        @include when(disabled) {
+          &,
+          &:hover,
+          &:focus {
+            border-color: transparent;
+            background-color: getCssVar('color', $type, 'light-3');
+            color: getCssVar('color', $type, 'dark-2');
+          }
+        }
+      }
+
+      @include when(dashed) {
+        color: getCssVar('button', 'bg-color');
+        border-style: getCssVar('border-style', 'dashed');
+        border-color: getCssVar('button', 'border-color');
+        background-color: transparent;
+        &:hover,
+        &:focus {
+          color: getCssVar('button', 'bg-color');
+          border-color: getCssVar('button', 'border-color');
+        }
+        @include when(disabled) {
+          background-color: transparent;
+          color: getCssVar('button', 'disabled', 'bg-color');
+          &,
+          &:hover,
+          &:focus {
+            background-color: transparent;
+            color: getCssVar('button', 'disabled', 'bg-color');
+          }
+        }
+      }
+      @include when(text) {
+        color: getCssVar('button', 'bg-color');
+        background-color: transparent;
+        border: none;
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: getCssVar('color-gray-bg');
+          color: getCssVar('button', 'bg-color');
+        }
+        @include when(disabled) {
+          background-color: transparent;
+          color: getCssVar('button', 'disabled', 'bg-color');
+          &,
+          &:hover,
+          &:focus {
+            background-color: transparent;
+            color: getCssVar('button', 'disabled', 'bg-color');
+          }
+        }
+      }
+      @include when(disabled) {
+        color: getCssVar('button', 'disabled', 'text-color');
+        background-color: getCssVar('button', 'disabled', 'bg-color');
+        border-color: getCssVar('button', 'disabled', 'border-color');
+        &,
+        &:hover,
+        &:focus {
+          color: getCssVar('button', 'disabled', 'text-color');
+          background-color: getCssVar('button', 'disabled', 'bg-color');
+          border-color: getCssVar('button', 'disabled', 'border-color');
+        }
       }
     }
   }

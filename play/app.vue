@@ -74,6 +74,12 @@
     <wd-button style="margin-left: 10px" type="success" size="large"
       >不小了</wd-button
     >
+    <wd-button style="margin-left: 10px" type="warning" size="normal"
+      >不小</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" size="small"
+      >小了</wd-button
+    >
   </div>
 
   <div style="margin: 10px 0">
@@ -193,7 +199,7 @@
       >Primary</wd-button
     >
     <wd-button style="margin-left: 10px" icon="caomei" type="info"
-      >Normal</wd-button
+      >Info</wd-button
     >
     <wd-button style="margin-left: 10px" icon="caomei" type="success"
       >Success</wd-button
@@ -205,17 +211,34 @@
       >Error</wd-button
     >
   </div>
+
+  <wd-button
+    style="margin-left: 10px"
+    icon="caomei"
+    type="info"
+    @click="onChangeTheme"
+    >Change Theme</wd-button
+  >
 </template>
 <script lang="ts">
+const useTheme = () => {
+  const themeMode = localStorage.getItem('wd-theme-mode')
+  themeMode == 'dark' && document.documentElement.classList.add('dark')
+  themeMode != 'dark' && document.documentElement.classList.remove('dark')
+}
+
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup() {
-    const bold = ref(false)
-    setTimeout(() => {
-      bold.value = true
-    }, 2000)
+    useTheme()
+    const switchRef = ref(false)
+    const onChangeTheme = () => {
+      switchRef.value = !switchRef.value
+      localStorage.setItem('wd-theme-mode', switchRef.value ? 'dark' : 'light')
+      useTheme()
+    }
     return {
-      bold,
+      onChangeTheme,
     }
   },
 })

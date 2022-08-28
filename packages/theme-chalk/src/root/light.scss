@@ -1,136 +1,30 @@
-@use 'sass:map';
+@use 'var' as *;
+@use '../mixins/function-var' as *;
 
-// Base
-$color-white: #ffffff;
-$color-black: #000000;
-$color-gray-bg: #eceded;
+:root{
+  color-scheme: light;
 
-// Primary
-$color-primary: #2080f0;
-$color-primary-light-1: #4098fc;
-$color-primary-light-2: #cee3fc;
-$color-primary-light-3: #e2eefd;
-$color-primary-dark-1: #2080f0;
-$color-primary-dark-2: #c3ddfb;
+  @include set-css-var-value('color-white', $color-white);
+  @include set-css-var-value('color-black', $color-black);
+  @include set-css-var-value('color-gray-bg', $color-gray-bg);
 
-// Success
-$color-success: #18a058;
-$color-success-light-1: #36ad6a;
-$color-success-light-2: #b3eacb;
-$color-success-light-3: #dcf3e6;
-$color-success-dark-1: #529b2e;
-$color-success-dark-2: #9de5bc;
+  // --el-color-#{$type}
+  // --el-color-#{$type}-light-{$i}
+  @each $type in (primary, success, warning, error, info) {
+    @include set-css-color-type($colors, $type);
+  }
 
-// Warning
-$color-warning: #f0a020;
-$color-warning-light-1: #fcb040;
-$color-warning-light-2: #f9ddb5;
-$color-warning-light-3: #f7e8d2;
-$color-warning-dark-1: #c97c10;
-$color-warning-dark-2: #f5d4a4;
+  @include set-css-var-value('bezier', $bezier);
 
-// Error
-$color-error: #d03050;
-$color-error-light-1: #de576d;
-$color-error-light-2: #f5dade;
-$color-error-light-3: #f2eaeb;
-$color-error-dark-1: #ab1f3f;
-$color-error-dark-2: #f0b7bf;
+  @include set-component-css-var('text-color', $text-color);
+  @include set-component-css-var('font-size', $font-size);
+  @include set-component-css-var('font-weight', $font-weight);
 
-// Info
-$color-info: #1f1f23;
-$color-info-light-1: #3d3d44;
-$color-info-light-2: #bdbdd0;
-$color-info-light-3: #e1e1f0;
-$color-info-dark-1: #2f2e30;
-$color-info-dark-2: #c3c3cf;
+  @include set-css-var-value('border-width', $border-width);
+  @include set-component-css-var('border-style', $border-style);
+  @include set-css-var-value('border-color', $border-color);
+  @include set-component-css-var('border-radius', $border-radius);
+  @include set-css-var-value('border', $border);
 
-// Bezier
-$bezier: cubic-bezier(0, 0, 0.2, 1);
-
-// Text-Color
-$text-color-base: #606266;
-
-// Font-Size
-$font-size-large: 18px;
-$font-size-medium: 16px;
-$font-size-base: 14px;
-$font-size-small: 13px;
-$font-size-mini: 12px;
-
-$font-size: () !default;
-$font-size: map.merge(
-  (
-    'font-size-mini': $font-size-mini,
-    'font-size-small': $font-size-small,
-    'font-size-normal': $font-size-base,
-    'font-size-medium': $font-size-medium,
-    'font-size-large': $font-size-large,
-  ),
-  $font-size
-);
-
-// Font-Weight
-$font-weight-base: 500;
-$font-weight-bold: 600;
-
-$font-weight: () !default;
-$font-weight: map.merge(
-  (
-    'font-weight-base': $font-weight-base,
-    'font-weight-bold': $font-weight-bold,
-  ),
-  $font-weight
-);
-
-// Border
-$border-width: 1px;
-$border-style-solid: solid;
-$border-style-dashed: dashed;
-$border-color-base: #dcdfe6;
-$border: $border-width $border-style-solid $border-color-base;
-
-$border-style: () !default;
-$border-style: map.merge(
-  (
-    'border-style-solid': $border-style-solid,
-    'border-style-dashed': $border-style-dashed,
-  ),
-  $border-style
-);
-
-// Border-Radius
-$border-radius-small: 2px;
-$border-radius-base: 4px;
-$border-radius-round: 20px;
-$border-radius-circle: 100%;
-
-$border-radius: () !default;
-$border-radius: map.merge(
-  (
-    'border-radius-small': $border-radius-small,
-    'border-radius-base': $border-radius-base,
-    'border-radius-round': $border-radius-round,
-    'border-radius-circle': $border-radius-circle,
-  ),
-  $border-radius
-);
-
-// spacing
-$spacing-mini: 1px;
-$spacing-small: 4px;
-$spacing-normal: 8px;
-$spacing-large: 16px;
-$spacing-huge: 20px;
-
-$spacing: () !default;
-$spacing: map.merge(
-  (
-    'spacing-mini': $spacing-mini,
-    'spacing-small': $spacing-small,
-    'spacing-normal': $spacing-normal,
-    'spacing-large': $spacing-large,
-    'spacing-huge': $spacing-huge,
-  ),
-  $spacing
-);
+  @include set-component-css-var('spacing', $spacing);
+}

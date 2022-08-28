@@ -1,0 +1,151 @@
+@use 'sass:map';
+@use '../mixins/function' as *;
+
+// types
+$types: primary, success, warning, error, info;
+
+$colors: () !default;
+$colors: map.deep-merge(
+  (
+    'white': #ffffff,
+    'black': #000000,
+    'primary': (
+      'base': #2080f0,
+      'light-1': #4098fc,
+      'light-2': #cee3fc,
+      'light-3': #e2eefd,
+      'dark-1': #2080f0,
+      'dark-2': #c3ddfb,
+    ),
+    'success': (
+      'base': #18a058,
+      'light-1': #36ad6a,
+      'light-2': #b3eacb,
+      'light-3': #dcf3e6,
+      'dark-1': #529b2e,
+      'dark-2': #9de5bc,
+    ),
+    'warning': (
+      'base': #f0a020,
+      'light-1': #fcb040,
+      'light-2': #f9ddb5,
+      'light-3': #f7e8d2,
+      'dark-1': #c97c10,
+      'dark-2': #f5d4a4,
+    ),
+    'error': (
+      'base': #d03050,
+      'light-1': #de576d,
+      'light-2': #f5dade,
+      'light-3': #f2eaeb,
+      'dark-1': #ab1f3f,
+      'dark-2': #f0b7bf,
+    ),
+    'info': (
+      'base': #1f1f23,
+      'light-1': #3d3d44,
+      'light-2': #bdbdd0,
+      'light-3': #e1e1f0,
+      'dark-1': #2f2e30,
+      'dark-2': #c3c3cf,
+    ),
+  ),
+  $colors
+);
+
+// Base-Color
+$color-white: #ffffff;
+$color-black: #000000;
+$color-gray-bg: #eceded;
+
+// Bezier
+$bezier: cubic-bezier(0, 0, 0.2, 1);
+
+// Text-Color
+$text-color: () !default;
+$text-color: map.merge(
+  (
+    'base': #606266,
+    'disabled':#a8abb2
+  ),
+  $text-color
+);
+
+// Font-Size
+$font-size: () !default;
+$font-size: map.merge(
+  (
+    'mini': 12px,
+    'small': 13px,
+    'normal': 14px,
+    'medium': 16px,
+    'large': 18px,
+  ),
+  $font-size
+);
+
+// Font-Weight
+$font-weight: () !default;
+$font-weight: map.merge(
+  (
+    'normal': 500,
+    'bold': 600,
+  ),
+  $font-weight
+);
+
+// Border
+$border-width: 1px;
+$border-style: () !default;
+$border-style: map.merge(
+  (
+    'solid': solid,
+    'dashed': dashed,
+  ),
+  $border-style
+);
+$border-color: #dcdfe6;
+$border: $border-width map.get($border-style, solid) $border-color;
+
+// Border-Radius
+$border-radius: () !default;
+$border-radius: map.merge(
+  (
+    'small': 2px,
+    'base': 4px,
+    'round': 20px,
+    'circle': 100%,
+  ),
+  $border-radius
+);
+
+// spacing
+$spacing: () !default;
+$spacing: map.merge(
+  (
+    'mini': 1px,
+    'small': 4px,
+    'normal': 8px,
+    'large': 16px,
+    'huge': 20px,
+  ),
+  $spacing
+);
+
+$button: () !default;
+$button: map.merge(
+  (
+    'text-color': getCssVar('text-color', 'base'),
+    'bg-color': getCssVar('color-white'),
+    'border-color': getCssVar('border-color'),
+    'hover-text-color': getCssVar('color-primary', 'light-1'),
+    'hover-bg-color': getCssVar('color-primary', 'light-3'),
+    'hover-border-color': getCssVar('color-primary', 'light-1'),
+    'active-text-color': getCssVar('color-primary', 'dark-1'),
+    'active-border-color': getCssVar('color-primary', 'dark-1'),
+    'disabled-text-color': getCssVar('text-color', 'disabled'),
+    'disabled-bg-color': getCssVar('color-white'),
+    'disabled-border-color': getCssVar('text-color', 'disabled'),
+  ),
+  $button
+);

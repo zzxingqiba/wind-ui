@@ -1,0 +1,84 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'var' as common;
+@use '../mixins/function-var' as *;
+
+// Background
+$bg-color: () !default;
+$bg-color: map.merge(
+  (
+    '': #F9F9F9,
+    'dark': #1d1e1f
+  ),
+  $bg-color
+);
+
+$colors: () !default;
+@each $type in common.$types {
+  $colors: map.deep-merge(
+    (
+      $type: (
+        'base': mix(
+          map.get($bg-color, ''),
+          map.get(common.$colors, $type, 'base'),
+          math.percentage(math.div(2, 10))
+        ),
+      ),
+    ),
+    $colors
+  ) !global;
+}
+
+@mixin set-color-mix-level(
+  $type,
+  $number,
+  $mode: 'light',
+  $mix-color: $color-white
+) {
+  // hex mix color
+  $colors: map.deep-merge(
+    (
+      $type: (
+        '#{$mode}-#{$number}':
+          mix(
+            $mix-color,
+            map.get($colors, $type, 'base'),
+            math.percentage(math.div($number, 5))
+          ),
+      ),
+    ),
+    $colors
+  ) !global;
+}
+
+@each $type in common.$types {
+  @for $i from 1 through 3 {
+    @include set-color-mix-level($type, $i, 'light', map.get($bg-color, 'dark'));
+  }
+}
+
+@each $type in common.$types {
+  @each $i in (1, 2) {
+    @include set-color-mix-level($type, $i, 'dark', map.get($bg-color, ''));
+  }
+}
+
+$border-color: rgba(255, 255, 255, 0.24);
+// Text-Color
+$text-color: () !default;
+$text-color: map.merge(
+  (
+    'base': #CFD3DC ,
+    'disabled':#6C6E72
+  ),
+  $text-color
+);
+
+html.dark {
+  color-scheme: dark;
+  @each $type in (primary, success, warning, error, info) {
+    @include set-css-color-type($colors, $type);
+  }
+  @include set-css-var-value('border-color', $border-color);
+  @include set-component-css-var('text-color', $text-color);
+}

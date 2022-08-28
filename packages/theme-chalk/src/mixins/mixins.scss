@@ -3,6 +3,7 @@
 @forward 'config';
 @forward '_function-var';
 @forward 'function';
+@forward '_button';
 
 @mixin b($block) {
   $B: $namespace + '-' + $block !global;
