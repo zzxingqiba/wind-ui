@@ -1,0 +1,6 @@
+{
+  "name": "@wind/constants",
+  "private": true,
+  "license": "MIT",
+  "main": "index.ts"
+}
