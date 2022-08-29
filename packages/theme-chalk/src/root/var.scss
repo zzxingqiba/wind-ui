@@ -77,7 +77,7 @@ $font-size: map.merge(
   (
     'mini': 12px,
     'small': 13px,
-    'normal': 14px,
+    '': 14px,
     'medium': 16px,
     'large': 18px,
   ),
@@ -88,7 +88,7 @@ $font-size: map.merge(
 $font-weight: () !default;
 $font-weight: map.merge(
   (
-    'normal': 500,
+    '': 500,
     'bold': 600,
   ),
   $font-weight
