@@ -1,5 +1,5 @@
 <template>
-  <div :class="switchKls">
+  <div :class="switchKls" @click="handleChange">
     <input
       ref="selfRef"
       type="checkbox"
@@ -7,6 +7,17 @@
       :class="ns.e('input')"
       @change="handleChange"
     />
+    <div :class="ns.e('rail')">
+      <!-- is only placeholder -->
+      <div v-if="inactiveText || activeText" :class="ns.e('placeholder')">
+        <span>{{ inactiveText }}</span>
+        <span>{{ activeText }}</span>
+      </div>
+      <div :class="ns.e('ball')">
+        <div :class="ns.e('inactive-text')">{{ inactiveText }}</div>
+        <div :class="ns.e('active-text')">{{ activeText }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +39,9 @@ export default defineComponent({
       ns.is('checked', checked.value),
     ])
     const namespace = computed(() => ns.namespace.value ?? '')
+
+    const _inactiveText = computed(() => props.inactiveText ?? undefined)
+    const _activeText = computed(() => props.activeText ?? undefined)
 
     const selfRef = ref<HTMLInputElement>()
     const controlledRef = ref(props.modelValue != false)
@@ -70,6 +84,8 @@ export default defineComponent({
       ns,
       switchKls,
       selfRef,
+      inactiveText: _inactiveText,
+      activeText: _activeText,
       handleChange,
     }
   },

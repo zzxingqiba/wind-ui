@@ -8,7 +8,7 @@
 @include b(button) {
   @each $type in (primary, success, warning, error, info) {
     @include m($type) {
-      @include button-var($type)
+      @include button-var($type);
     }
   }
 }
@@ -35,8 +35,7 @@
   font-weight: getCssVar('font-weight');
   color: getCssVar('button', 'text-color');
   border-radius: getCssVar('border-radius', 'base');
-  padding: getCssVar('spacing', 'normal')
-    getCssVar('spacing', 'large');
+  padding: getCssVar('spacing', 'normal') getCssVar('spacing', 'large');
 
   &:hover,
   &:focus {
@@ -59,7 +58,7 @@
   }
 
   @include b(button-base-wave) {
-    @include  set-css-var-value('base-wave-color', getCssVar('color-primary'))
+    @include set-css-var-value('base-wave-color', getCssVar('color-primary'));
   }
 
   @include when(bold) {
@@ -99,7 +98,7 @@
 
   @include when(disabled) {
     background-color: getCssVar('button', 'disabled', 'bg-color');
-    color: getCssVar('button', 'disabled', 'text-color',);
+    color: getCssVar('button', 'disabled', 'text-color');
     &,
     &:hover,
     &:focus {
@@ -115,16 +114,13 @@
     @include m($size) {
       font-size: getCssVar('font-size');
       @if $size == mini {
-        padding: getCssVar('spacing', 'mini')
-          getCssVar('spacing', 'mini');
+        padding: getCssVar('spacing', 'mini') getCssVar('spacing', 'mini');
       }
       @if $size == small {
-        padding: getCssVar('spacing', 'small')
-          getCssVar('spacing', 'small');
+        padding: getCssVar('spacing', 'small') getCssVar('spacing', 'small');
       }
       @if $size == large {
-        padding: getCssVar('spacing', 'normal')
-          getCssVar('spacing', 'large');
+        padding: getCssVar('spacing', 'normal') getCssVar('spacing', 'large');
       }
       @include when(circle) {
         padding: getCssVar('spacing', $size);
@@ -150,7 +146,10 @@
       }
 
       @include b(button-base-wave) {
-        @include  set-css-var-value('base-wave-color', getCssVar('color', $type))
+        @include set-css-var-value(
+          'base-wave-color',
+          getCssVar('color', $type)
+        );
       }
 
       @include when(plain) {

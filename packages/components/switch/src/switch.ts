@@ -28,6 +28,12 @@ export const switchProps = {
     type: Boolean,
     default: false,
   },
+  activeText: {
+    type: String,
+  },
+  inactiveText: {
+    type: String,
+  },
 } as const
 
 export type SwitchProps = ExtractPropTypes<typeof switchProps>

@@ -23,10 +23,23 @@
   }
 }
 
+@mixin e($element) {
+  $E: $element !global;
+  $currentSelector: '';
+  @each $unit in $element {
+    $currentSelector: '.' + $B + $element-separator + $unit + ',';
+  }
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
 @mixin when($state) {
   @at-root {
     &.#{$state-prefix + $state} {
       @content;
     }
   }
-} ;
+}

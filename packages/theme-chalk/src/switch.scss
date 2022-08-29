@@ -1,0 +1,172 @@
+@use 'sass:map';
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'root/var' as *;
+
+$switch-height: () !default;
+$switch-height: map.merge(
+  (
+    'large': 40px,
+    'default': 32px,
+    'small': 24px,
+  ),
+  $switch-height
+);
+
+$switch-font-size: () !default;
+$switch-font-size: map.merge(
+  (
+    'large': 14px,
+    'default': 14px,
+    'small': 12px,
+  ),
+  $switch-font-size
+);
+
+$switch-rail-border-radius: () !default;
+$switch-rail-border-radius: map.merge(
+  (
+    'large': 12px,
+    'default': 10px,
+    'small': 8px,
+  ),
+  $switch-rail-border-radius
+);
+
+$switch-rail-width: () !default;
+$switch-rail-width: map.merge(
+  (
+    'large': 50px,
+    'default': 40px,
+    'small': 30px,
+  ),
+  $switch-rail-width
+);
+
+$switch-rail-height: () !default;
+$switch-rail-height: map.merge(
+  (
+    'large': 24px,
+    'default': 20px,
+    'small': 16px,
+  ),
+  $switch-rail-height
+);
+
+$switch-ball-size: () !default;
+$switch-ball-size: map.merge(
+  (
+    'large': 20px,
+    'default': 16px,
+    'small': 12px,
+  ),
+  $switch-ball-size
+);
+$switch-offset: 2px;
+
+@include b(switch) {
+  @include set-component-css-var('switch', $switch);
+}
+
+@include b(switch) {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-size: map.get($switch-font-size, 'default');
+  line-height: map.get($switch-rail-height, 'default');
+  height: map.get($switch-height, 'default');
+  vertical-align: middle;
+
+  @include e(input) {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+  }
+
+  @include e(rail) {
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+    overflow: hidden;
+    min-width: map.get($switch-rail-width, 'default');
+    height: map.get($switch-rail-height, 'default');
+    background-color: getCssVar('switch', 'off-color');
+    border-radius: map.get($switch-rail-border-radius, 'default');
+    transition: background-color 0.3s getCssVar(bezier),
+      opacity 0.3s getCssVar(bezier);
+  }
+  @include e(placeholder) {
+    height: 1px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+
+    & > span {
+      display: inline-block;
+      padding-left: map.get($switch-ball-size, 'default') +
+        ($switch-offset * 10);
+    }
+  }
+  @include e(ball) {
+    position: absolute;
+    left: $switch-offset;
+    top: $switch-offset;
+    display: inline-block;
+    min-width: map.get($switch-ball-size, 'default');
+    height: map.get($switch-ball-size, 'default');
+    border-radius: getCssVar('border-radius', 'circle');
+    background-color: getCssVar('color-white');
+    transition: left 0.3s getCssVar(bezier), padding 0.3s getCssVar(bezier);
+    &:active {
+      padding-right: $switch-offset;
+    }
+  }
+
+  @each $name in (inactive-text, active-text) {
+    @include e($name) {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      line-height: 1;
+      white-space: nowrap;
+      color: getCssVar('color-white');
+      @if $name == inactive-text {
+        left: 0;
+        transform: translateX(
+          ($switch-offset * 5) + map.get($switch-ball-size, 'default')
+        );
+      } @else {
+        right: 0;
+        transform: translateX(
+          -($switch-offset * 5) - map.get($switch-ball-size, 'default')
+        );
+      }
+    }
+  }
+
+  @include when(checked) {
+    .#{$namespace}-switch__rail {
+      background-color: getCssVar('switch', 'on-color');
+    }
+
+    .#{$namespace}-switch__ball {
+      left: calc(100% - map.get($switch-ball-size, 'default') - $switch-offset);
+
+      &:active {
+        left: calc(
+          100% - map.get($switch-ball-size, 'default') - $switch-offset * 2
+        );
+      }
+    }
+  }
+}

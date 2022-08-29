@@ -1,6 +1,6 @@
 @use '_function-var' as *;
 
-@mixin button-var ($type) {
+@mixin button-var($type) {
   $button-color-types: (
     '': (
       'text-color': (
@@ -70,7 +70,7 @@
         $type,
         'light-3',
       ),
-    )
+    ),
   );
 
   @each $type, $typeMap in $button-color-types {

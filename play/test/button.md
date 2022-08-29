@@ -1,6 +1,7 @@
 ## Play Button
 
 ## entry main.ts
+
 import { createApp } from 'vue'
 import APP from './app.vue'
 import WdButton from '@wind/components/button'
@@ -9,8 +10,8 @@ const app = createApp(APP)
 app.use(WdButton)
 app.mount('#app')
 
-
 ## test app.vue
+
 <template>
   <!-- type -->
   <div style="margin: 10px 0">
@@ -239,14 +240,15 @@ app.mount('#app')
   </div>
 
   <!-- test change theme -->
-  <wd-button
-    style="margin-left: 10px"
-    icon="caomei"
-    type="info"
-    @click="onChangeTheme"
-    >Change Theme</wd-button
-  >
-</template>
+
+<wd-button
+style="margin-left: 10px"
+icon="caomei"
+type="info"
+@click="onChangeTheme" >Change Theme</wd-button
+
+> </template>
+
 <script lang="ts">
 const useTheme = () => {
   const themeMode = localStorage.getItem('wd-theme-mode')

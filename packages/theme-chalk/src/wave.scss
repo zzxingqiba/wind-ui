@@ -11,8 +11,7 @@
   border-radius: inherit;
   animation-iteration-count: 1;
   animation-duration: 0.6s;
-  animation-timing-function: getCssVar('bezier'),
-    getCssVar('bezier');
+  animation-timing-function: getCssVar('bezier'), getCssVar('bezier');
 
   &--active {
     z-index: 1;
