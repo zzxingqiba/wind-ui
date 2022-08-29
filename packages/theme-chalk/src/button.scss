@@ -31,8 +31,8 @@
   background-color: transparent;
   border: getCssVar('border');
   border-color: getCssVar('button', 'border-color');
-  font-size: getCssVar('font-size', 'normal');
-  font-weight: getCssVar('font-weight', 'normal');
+  font-size: getCssVar('font-size');
+  font-weight: getCssVar('font-weight');
   color: getCssVar('button', 'text-color');
   border-radius: getCssVar('border-radius', 'base');
   padding: getCssVar('spacing', 'normal')
@@ -113,7 +113,7 @@
 
   @each $size in (mini, small, large) {
     @include m($size) {
-      font-size: getCssVar('font-size', 'normal');
+      font-size: getCssVar('font-size');
       @if $size == mini {
         padding: getCssVar('spacing', 'mini')
           getCssVar('spacing', 'mini');
