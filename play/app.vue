@@ -27,6 +27,23 @@
       @update:model-value="handleUpdate"
     />
   </div>
+
+  <!-- size ( large small ) -->
+  <div style="margin: 10px">
+    <wd-switch
+      v-model="value"
+      size="small"
+      @update:model-value="handleUpdate"
+    />
+    <div />
+    <wd-switch v-model="value" @update:model-value="handleUpdate" />
+    <div />
+    <wd-switch
+      v-model:value="value"
+      size="large"
+      @update:value="handleUpdate"
+    />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
