@@ -27,4 +27,6 @@
   @include set-css-var-value('border', $border);
 
   @include set-component-css-var('spacing', $spacing);
+
+  @include set-component-css-var('box-shadow', $box-shadow);
 }

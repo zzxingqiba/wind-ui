@@ -56,7 +56,7 @@ $colors: map.deep-merge(
 // Base-Color
 $color-white: #ffffff;
 $color-black: #000000;
-$color-gray-bg: #eceded;
+$color-gray-bg: rgba(0, 0, 0, 0.14);
 
 // Bezier
 $bezier: cubic-bezier(0, 0, 0.2, 1);
@@ -132,6 +132,20 @@ $spacing: map.merge(
   $spacing
 );
 
+// box-shadow
+$box-shadow: () !default;
+$box-shadow: map.merge(
+  (
+    'gray': (
+      0 0 0 2px getCssVar('color-gray-bg'),
+    ),
+    'primary': (
+      0 0 0 2px getCssVar('color-primary'),
+    ),
+  ),
+  $box-shadow
+);
+
 // Button
 $button: () !default;
 $button: map.merge(
@@ -157,6 +171,10 @@ $switch: map.merge(
   (
     'on-color': getCssVar('color-primary'),
     'off-color': getCssVar('color-gray-bg'),
+    'ball-box-shadow': (
+      0 1px 4px 0 rgba(0, 0, 0, 0.3),
+      inset 0 0 1px 0 rgba(0, 0, 0, 0.05),
+    ),
   ),
   $switch
 );

@@ -1,5 +1,6 @@
 <template>
-  <div :class="switchKls" @click="handleChange">
+  <div :class="switchKls" :style="style" @click="handleChange">
+    <!-- Semantic -->
     <input
       ref="selfRef"
       type="checkbox"
@@ -14,8 +15,22 @@
         <span>{{ activeText }}</span>
       </div>
       <div :class="ns.e('ball')">
+        <!-- inactive-text -->
         <div :class="ns.e('inactive-text')">{{ inactiveText }}</div>
+        <!-- active-text -->
         <div :class="ns.e('active-text')">{{ activeText }}</div>
+        <TransitionGroup
+          :name="`${namespace}-switch-transition`"
+          appear
+          tag="div"
+        >
+          <span v-if="checked" key="active" :class="ns.e('icon')"
+            ><slot name="active-icon"
+          /></span>
+          <span v-else key="inactive" :class="ns.e('icon')"
+            ><slot name="inactive-icon"
+          /></span>
+        </TransitionGroup>
       </div>
     </div>
   </div>
@@ -35,16 +50,23 @@ export default defineComponent({
     const switchKls = computed(() => [
       ns.b(),
       ns.m(switchSize.value),
-      ns.is('disabled', props.disabled),
+      ns.is('disabled', _disabled.value),
       ns.is('checked', checked.value),
     ])
     const namespace = computed(() => ns.namespace.value ?? '')
 
     const _inactiveText = computed(() => props.inactiveText ?? undefined)
     const _activeText = computed(() => props.activeText ?? undefined)
+    const activeColor = computed(() => props.activeColor ?? '')
+    const inactiveColor = computed(() => props.inactiveColor ?? '')
+    const _style = computed(() => ({
+      [`--${namespace.value}-switch-on-color`]: activeColor.value,
+      [`--${namespace.value}-switch-off-color`]: inactiveColor.value,
+    }))
+    const _disabled = computed(() => !!props.disabled ?? false)
 
     const selfRef = ref<HTMLInputElement>()
-    const controlledRef = ref(props.modelValue != false)
+    const controlledRef = ref(props.modelValue !== false)
     watch(
       () => props.modelValue,
       () => {
@@ -71,6 +93,7 @@ export default defineComponent({
     })
 
     const handleChange = () => {
+      if (!!_disabled.value) return
       const val = checked.value ? props.inactiveValue : props.activeValue
       emit('update:modelValue', val)
       emit('update:value', val)
@@ -86,6 +109,8 @@ export default defineComponent({
       selfRef,
       inactiveText: _inactiveText,
       activeText: _activeText,
+      style: _style,
+      checked,
       handleChange,
     }
   },

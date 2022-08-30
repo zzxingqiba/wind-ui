@@ -25,13 +25,19 @@ export const switchProps = {
     type: String as PropType<ComponentSize>,
   },
   disabled: {
-    type: Boolean,
+    type: [Boolean, String, Number] as ValuePropType,
     default: false,
   },
   activeText: {
     type: String,
   },
   inactiveText: {
+    type: String,
+  },
+  activeColor: {
+    type: String,
+  },
+  inactiveColor: {
     type: String,
   },
 } as const
