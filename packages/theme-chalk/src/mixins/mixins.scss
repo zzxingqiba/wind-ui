@@ -26,7 +26,6 @@
 @mixin m($modifier) {
   $selector: '&';
   $currentSelector: $selector + $modifier-separator + $modifier + ',';
-
   #{$currentSelector} {
     @content;
   }
