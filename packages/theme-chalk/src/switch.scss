@@ -161,7 +161,7 @@ $on-switch-box-shadow: (
     min-width: map.get($switch-ball-size, 'default');
     height: map.get($switch-ball-size, 'default');
     border-radius: getCssVar('border-radius', 'circle');
-    background-color: getCssVar('color-white');
+    background-color: getCssVar('switch', 'ball-color');
     box-shadow: getCssVar('switch', 'ball-box-shadow');
     transition: left 0.3s getCssVar(bezier), padding 0.3s getCssVar(bezier),
       opacity 0.3s getCssVar(bezier), box-shadow 0.3s getCssVar(bezier);
@@ -182,6 +182,15 @@ $on-switch-box-shadow: (
     justify-content: center;
     align-items: center;
     line-height: 1;
+  }
+
+  @include when(round) {
+    .#{$namespace}-switch__rail {
+      border-radius: map.get($border-radius, 'base');
+    }
+    .#{$namespace}-switch__ball {
+      border-radius: map.get($border-radius, 'base');
+    }
   }
 
   @each $name in (inactive-text, active-text) {

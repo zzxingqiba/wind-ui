@@ -52,11 +52,13 @@ export default defineComponent({
       ns.m(switchSize.value),
       ns.is('disabled', _disabled.value),
       ns.is('checked', checked.value),
+      ns.is('round', _round.value),
     ])
     const namespace = computed(() => ns.namespace.value ?? '')
 
     const _inactiveText = computed(() => props.inactiveText ?? undefined)
     const _activeText = computed(() => props.activeText ?? undefined)
+    const _round = computed(() => props.round ?? undefined)
     const activeColor = computed(() => props.activeColor ?? '')
     const inactiveColor = computed(() => props.inactiveColor ?? '')
     const _style = computed(() => ({
@@ -86,6 +88,7 @@ export default defineComponent({
     if (![props.activeValue, props.inactiveValue].includes(actualValue.value)) {
       emit('update:modelValue', props.inactiveValue)
       emit('update:value', props.inactiveValue)
+      emit('change')
     }
 
     watch(checked, (val) => {
@@ -97,6 +100,7 @@ export default defineComponent({
       const val = checked.value ? props.inactiveValue : props.activeValue
       emit('update:modelValue', val)
       emit('update:value', val)
+      emit('change', val)
     }
 
     onMounted(() => {

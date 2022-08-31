@@ -40,6 +40,9 @@ export const switchProps = {
   inactiveColor: {
     type: String,
   },
+  round: {
+    type: Boolean,
+  },
 } as const
 
 export type SwitchProps = ExtractPropTypes<typeof switchProps>

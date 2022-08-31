@@ -12,27 +12,23 @@
   }
 }
 
+@mixin e($element) {
+  $E: $element !global;
+  $currentSelector: &;
+  @each $unit in $element {
+    $currentSelector: $currentSelector + $element-separator + $unit + ',';
+  }
+  #{$currentSelector} {
+    @content;
+  }
+}
+
 @mixin m($modifier) {
   $selector: &;
   $currentSelector: $selector + $modifier-separator + $modifier + ',';
 
-  @at-root {
-    #{$currentSelector} {
-      @content;
-    }
-  }
-}
-
-@mixin e($element) {
-  $E: $element !global;
-  $currentSelector: '';
-  @each $unit in $element {
-    $currentSelector: '.' + $B + $element-separator + $unit + ',';
-  }
-  @at-root {
-    #{$currentSelector} {
-      @content;
-    }
+  #{$currentSelector} {
+    @content;
   }
 }
 
