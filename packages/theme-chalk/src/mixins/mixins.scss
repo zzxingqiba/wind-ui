@@ -14,7 +14,7 @@
 
 @mixin e($element) {
   $E: $element !global;
-  $currentSelector: &;
+  $currentSelector: '&';
   @each $unit in $element {
     $currentSelector: $currentSelector + $element-separator + $unit + ',';
   }
@@ -24,7 +24,7 @@
 }
 
 @mixin m($modifier) {
-  $selector: &;
+  $selector: '&';
   $currentSelector: $selector + $modifier-separator + $modifier + ',';
 
   #{$currentSelector} {
