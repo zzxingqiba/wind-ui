@@ -240,14 +240,16 @@ app.mount('#app')
   </div>
 
   <!-- test change theme -->
-
-<wd-button
-style="margin-left: 10px"
-icon="caomei"
-type="info"
-@click="onChangeTheme" >Change Theme</wd-button
-
-> </template>
+  <div style="margin: 10px 0">
+    <wd-button
+      style="margin-left: 10px"
+      icon="caomei"
+      type="info"
+      @click="onChangeTheme"
+      >Change Theme</wd-button
+    >
+  </div>
+</template>
 
 <script lang="ts">
 const useTheme = () => {

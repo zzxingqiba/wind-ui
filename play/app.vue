@@ -1,153 +1,252 @@
 <template>
-  <!-- v-model / v-model:value -->
-  <div style="margin: 10px">
-    <wd-switch v-model="value1" />
-    <div />
-    <wd-switch v-model:value="value2" />
+  <!-- type -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px">Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary">Primary</wd-button>
+    <wd-button style="margin-left: 10px" type="info">Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success">Success</wd-button>
+    <wd-button style="margin-left: 10px" type="warning">Warning</wd-button>
+    <wd-button style="margin-left: 10px" type="error">Error</wd-button>
   </div>
 
-  <!-- active-value / inactive-value -->
-  <div style="margin: 10px">
-    <wd-switch v-model="value3" active-value="1" inactive-value="2" />
-  </div>
-
-  <!-- active-text / inactive-text -->
-  <div style="margin: 10px">
-    <wd-switch
-      v-model="value4"
-      active-value="1"
-      inactive-value="2"
-      active-text="自然赠予你，树冠 微风 肩头的暴雨"
-      inactive-text="片刻后生成，平衡 忠诚 不息的身体"
-    />
-  </div>
-
-  <!-- size ( large small ) -->
-  <div style="margin: 10px">
-    <wd-switch v-model="value5" size="small" />
-    <div />
-    <wd-switch v-model="value6" />
-    <div />
-    <wd-switch v-model:value="value7" size="large" />
-  </div>
-
-  <!-- size ( large small ) / active-text / inactive-text -->
-  <div style="margin: 10px">
-    <wd-switch
-      v-model="value8"
-      size="small"
-      active-text="自然赠予你，树冠 微风 肩头的暴雨"
-      inactive-text="片刻后生成，平衡 忠诚 不息的身体"
-    />
-    <div />
-    <wd-switch
-      v-model="value9"
-      active-text="自然赠予你，树冠 微风 肩头的暴雨"
-      inactive-text="片刻后生成，平衡 忠诚 不息的身体"
-    />
-    <div />
-    <wd-switch
-      v-model:value="value10"
-      size="large"
-      active-text="自然赠予你，树冠 微风 肩头的暴雨"
-      inactive-text="片刻后生成，平衡 忠诚 不息的身体"
-    />
-  </div>
-
-  <!-- active-color / inactive-color -->
-  <div style="margin: 10px">
-    <wd-switch
-      v-model="value11"
-      active-color="#7A69EB"
-      inactive-color="#7CD0FD"
-    />
-  </div>
-
-  <!-- disabled -->
-  <div style="margin: 10px">
-    <wd-switch v-model="value12" disabled />
-  </div>
-
-  <!-- active-icon / inactive-icon -->
-  <div style="margin: 10px">
-    <wd-switch v-model="value13" size="small">
-      <template #active-icon>
-        <i class="w-icon-xiasanjiao" style="color: #7a69eb" />
-      </template>
-      <template #inactive-icon>
-        <i class="w-icon-caomei" style="color: #7a69eb" />
-      </template>
-    </wd-switch>
-    <div />
-    <wd-switch v-model="value14">
-      <template #active-icon>
-        <i class="w-icon-xiasanjiao" style="color: #7a69eb" />
-      </template>
-      <template #inactive-icon>
-        <i class="w-icon-caomei" style="color: #7a69eb" />
-      </template>
-    </wd-switch>
-    <div />
-    <wd-switch
-      v-model="value15"
-      size="large"
-      active-color="#606266"
-      :style="{ '--w-switch-ball-color': switchRef ? '#000' : '#fff' }"
-      @change="onChangeTheme"
-    >
-      <template #active-icon>
-        <svg viewBox="0 0 24 24" style="color: ##606266">
-          <path
-            d="M11.01 3.05C6.51 3.54 3 7.36 3 12a9 9 0 0 0 9 9c4.63 0 8.45-3.5 8.95-8c.09-.79-.78-1.42-1.54-.95A5.403 5.403 0 0 1 11.1 7.5c0-1.06.31-2.06.84-2.89c.45-.67-.04-1.63-.93-1.56z"
-            fill="currentColor"
-          ></path>
-        </svg>
-      </template>
-      <template #inactive-icon>
-        <svg viewBox="0 0 24 24" style="color: #000">
-          <path
-            d="M6.05 4.14l-.39-.39a.993.993 0 0 0-1.4 0l-.01.01a.984.984 0 0 0 0 1.4l.39.39c.39.39 1.01.39 1.4 0l.01-.01a.984.984 0 0 0 0-1.4zM3.01 10.5H1.99c-.55 0-.99.44-.99.99v.01c0 .55.44.99.99.99H3c.56.01 1-.43 1-.98v-.01c0-.56-.44-1-.99-1zm9-9.95H12c-.56 0-1 .44-1 .99v.96c0 .55.44.99.99.99H12c.56.01 1-.43 1-.98v-.97c0-.55-.44-.99-.99-.99zm7.74 3.21c-.39-.39-1.02-.39-1.41-.01l-.39.39a.984.984 0 0 0 0 1.4l.01.01c.39.39 1.02.39 1.4 0l.39-.39a.984.984 0 0 0 0-1.4zm-1.81 15.1l.39.39a.996.996 0 1 0 1.41-1.41l-.39-.39a.993.993 0 0 0-1.4 0c-.4.4-.4 1.02-.01 1.41zM20 11.49v.01c0 .55.44.99.99.99H22c.55 0 .99-.44.99-.99v-.01c0-.55-.44-.99-.99-.99h-1.01c-.55 0-.99.44-.99.99zM12 5.5c-3.31 0-6 2.69-6 6s2.69 6 6 6s6-2.69 6-6s-2.69-6-6-6zm-.01 16.95H12c.55 0 .99-.44.99-.99v-.96c0-.55-.44-.99-.99-.99h-.01c-.55 0-.99.44-.99.99v.96c0 .55.44.99.99.99zm-7.74-3.21c.39.39 1.02.39 1.41 0l.39-.39a.993.993 0 0 0 0-1.4l-.01-.01a.996.996 0 0 0-1.41 0l-.39.39c-.38.4-.38 1.02.01 1.41z"
-            fill="currentColor"
-          ></path>
-        </svg>
-      </template>
-    </wd-switch>
+  <!-- bold -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" bold>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" bold>Primary</wd-button>
+    <wd-button style="margin-left: 10px" type="info" bold>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" bold>Success</wd-button>
+    <wd-button style="margin-left: 10px" type="warning" bold>Warning</wd-button>
+    <wd-button style="margin-left: 10px" type="error" bold>Error</wd-button>
   </div>
 
   <!-- round -->
-  <div style="margin: 10px">
-    <wd-switch v-model="value1" round />
-    <div />
-    <wd-switch v-model:value="value2" />
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" round>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" round
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" round>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" round
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" round
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" round>Error</wd-button>
+  </div>
+
+  <!-- circle -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" icon="xiasanjiao" circle size="mini" />
+    <wd-button
+      style="margin-left: 10px"
+      icon="xiasanjiao"
+      type="primary"
+      size="small"
+      circle
+    />
+    <wd-button style="margin-left: 10px" icon="xiasanjiao" type="info" circle />
+    <wd-button
+      style="margin-left: 10px"
+      icon="xiasanjiao"
+      type="success"
+      size="large"
+      circle
+    />
+    <wd-button
+      style="margin-left: 10px"
+      icon="xiasanjiao"
+      type="warning"
+      circle
+    />
+    <wd-button
+      style="margin-left: 10px"
+      icon="xiasanjiao"
+      type="error"
+      circle
+    />
+  </div>
+
+  <!-- size -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" size="mini">小小</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" size="small"
+      >小了</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" size="normal"
+      >不小</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" size="large"
+      >不小了</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" size="normal"
+      >不小</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" size="small"
+      >小了</wd-button
+    >
+  </div>
+
+  <!-- plain -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" plain>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" plain
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" plain>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" plain
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" plain
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" plain>Error</wd-button>
+  </div>
+
+  <!-- dashed -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" dashed>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" dashed
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" dashed>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" dashed
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" dashed
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" dashed>Error</wd-button>
+  </div>
+
+  <!-- text -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" text>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" text>Primary</wd-button>
+    <wd-button style="margin-left: 10px" type="info" text>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" text>Success</wd-button>
+    <wd-button style="margin-left: 10px" type="warning" text>Warning</wd-button>
+    <wd-button style="margin-left: 10px" type="error" text>Error</wd-button>
+  </div>
+
+  <!-- disabled text -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" text disabled>Normal</wd-button>
+    <wd-button style="margin-left: 10px" text type="primary" disabled
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" text disabled
+      >Info</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" text disabled
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" text disabled
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" text disabled
+      >Error</wd-button
+    >
+  </div>
+
+  <!-- disabled plain -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" disabled plain>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" disabled plain
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" disabled plain
+      >Info</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" disabled plain
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" disabled plain
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" disabled plain
+      >Error</wd-button
+    >
+  </div>
+
+  <!-- disabled type -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" disabled>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" disabled
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" disabled>Info</wd-button>
+    <wd-button style="margin-left: 10px" type="success" disabled
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" disabled
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" disabled>Error</wd-button>
+  </div>
+
+  <!-- disabled dashed -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" disabled dashed>Normal</wd-button>
+    <wd-button style="margin-left: 10px" type="primary" disabled dashed
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="info" disabled dashed
+      >Info</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="success" disabled dashed
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="warning" disabled dashed
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" type="error" disabled dashed
+      >Error</wd-button
+    >
+  </div>
+
+  <!-- icon -->
+  <div style="margin: 10px 0">
+    <wd-button style="margin-left: 10px" icon="caomei">Normal</wd-button>
+    <wd-button style="margin-left: 10px" icon="caomei" type="primary"
+      >Primary</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="info"
+      >Info</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="success"
+      >Success</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="warning"
+      >Warning</wd-button
+    >
+    <wd-button style="margin-left: 10px" icon="caomei" type="error"
+      >Error</wd-button
+    >
+  </div>
+
+  <!-- test change theme -->
+  <div style="margin: 10px 0">
+    <wd-button
+      style="margin-left: 10px"
+      icon="caomei"
+      type="info"
+      @click="onChangeTheme"
+      >Change Theme</wd-button
+    >
   </div>
 </template>
+
 <script lang="ts">
+const useTheme = () => {
+  const themeMode = localStorage.getItem('wd-theme-mode')
+  themeMode == 'dark' && document.documentElement.classList.add('dark')
+  themeMode != 'dark' && document.documentElement.classList.remove('dark')
+}
 import { defineComponent, ref } from 'vue'
-import { useTheme } from '@wind/hooks'
 export default defineComponent({
   setup() {
-    const valueRef1 = ref(false)
-    const valueRef2 = ref(false)
-    const valueRef3 = ref(false)
-    const valueRef4 = ref(false)
-    const valueRef5 = ref(true)
-    const valueRef6 = ref(true)
-    const valueRef7 = ref(true)
-    const valueRef8 = ref(false)
-    const valueRef9 = ref(false)
-    const valueRef10 = ref(false)
-    const valueRef11 = ref(false)
-    const valueRef12 = ref(false)
-    const valueRef13 = ref(false)
-    const valueRef14 = ref(false)
-    const valueRef15 = ref(false)
-    const valueRef16 = ref(false)
-    const valueRef17 = ref(false)
-
-    setTimeout(() => {
-      valueRef12.value = true
-    }, 2000)
-
+    useTheme()
     const switchRef = ref(false)
     const onChangeTheme = () => {
       switchRef.value = !switchRef.value
@@ -155,24 +254,6 @@ export default defineComponent({
       useTheme()
     }
     return {
-      value1: valueRef1,
-      value2: valueRef2,
-      value3: valueRef3,
-      value4: valueRef4,
-      value5: valueRef5,
-      value6: valueRef6,
-      value7: valueRef7,
-      value8: valueRef8,
-      value9: valueRef9,
-      value10: valueRef10,
-      value11: valueRef11,
-      value12: valueRef12,
-      value13: valueRef13,
-      value14: valueRef14,
-      value15: valueRef15,
-      value16: valueRef16,
-      value17: valueRef17,
-      switchRef,
       onChangeTheme,
     }
   },
