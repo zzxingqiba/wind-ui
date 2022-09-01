@@ -1,16 +1,16 @@
-import type { ExtractPropTypes, VNode } from 'vue'
+import type { ExtractPropTypes, VNode, PropType } from 'vue'
 import { definePropType } from '@wind/utils'
 
 export const appearTypes = [
-  'default',
-  'primary',
-  'success',
-  'warning',
-  'info',
-  'danger',
-  'text',
-  '',
+  'top',
+  'top-left',
+  'top-right',
+  'bottom',
+  'bottom-left',
+  'bottom-right',
 ] as const
+
+export const messageTypes = ['success', 'info', 'warning', 'error'] as const
 
 export const messageProps = {
   message: {
@@ -21,7 +21,15 @@ export const messageProps = {
     ]),
   },
   appear: {
-    type: String,
+    type: String as PropType<
+      | 'top'
+      | 'top-left'
+      | 'top-right'
+      | 'bottom'
+      | 'bottom-left'
+      | 'bottom-right'
+    >,
+    values: appearTypes,
     default: 'top',
   },
 }

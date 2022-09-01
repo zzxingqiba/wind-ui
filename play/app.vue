@@ -16,7 +16,7 @@ export default defineComponent({
   setup() {
     const { $message } = useGlobalProperties()!
     const showMessage1 = () => {
-      console.log($message)
+      $message({ message: 'xxxxxxx' })
     }
     return {
       showMessage1,
