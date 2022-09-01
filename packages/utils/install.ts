@@ -8,3 +8,10 @@ export const withInstall = <T>(comp: T) => {
   }
   return comp as SFCWithInstall<T>
 }
+
+export const withInstallFunction = <T>(fn: T, name: string) => {
+  ;(fn as SFCWithInstall<T>).install = (app: App) => {
+    app.config.globalProperties[name] = fn
+  }
+  return fn as SFCWithInstall<T>
+}
