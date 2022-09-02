@@ -1,5 +1,8 @@
-import Message from './src/method'
-import { withInstallFunction } from '@wind/utils/index'
+import { useMessage as message } from './src/useMessage'
+import messageProvider from './src/message-provider.vue'
 
-export const WdMessage = withInstallFunction(Message, '$message')
-export default WdMessage
+import { withInstall, withInstallFunction } from '@wind/utils/index'
+
+const WdMessageProvider = withInstall(messageProvider)
+export const useMessage = withInstallFunction(message, 'useMessage')
+export default WdMessageProvider

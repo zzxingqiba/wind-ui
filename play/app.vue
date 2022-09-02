@@ -1,25 +1,22 @@
 <template>
-  <wd-button type="primary" @click="showMessage1">点我下</wd-button>
+  <wd-message-provider>
+    <wd-button-group @change="changeAppear" />
+  </wd-message-provider>
 </template>
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from 'vue'
-const useGlobalProperties = () => {
-  if (!getCurrentInstance) return
-  const {
-    appContext: {
-      config: { globalProperties },
-    },
-  } = getCurrentInstance()!
-  return globalProperties
-}
+import { defineComponent } from 'vue'
+import WdButtonGroup from './childComponent.vue'
+
 export default defineComponent({
+  components: {
+    WdButtonGroup,
+  },
   setup() {
-    const { $message } = useGlobalProperties()!
-    const showMessage1 = () => {
-      $message({ message: 'xxxxxxx' })
+    const changeAppear = (value: string) => {
+      // console.log(value)
     }
     return {
-      showMessage1,
+      changeAppear,
     }
   },
 })
