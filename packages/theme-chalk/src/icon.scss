@@ -16,6 +16,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.#{$namespace}-icon-error:before {
+  content: '\e600';
+}
+
+.#{$namespace}-icon-warning:before {
+  content: '\e64f';
+}
+
+.#{$namespace}-icon-close:before {
+  content: '\e62f';
+}
+
+.#{$namespace}-icon-info:before {
+  content: '\e60e';
+}
+
+.#{$namespace}-icon-success:before {
+  content: '\e6b9';
+}
+
 .#{$namespace}-icon-xiasanjiao:before {
   content: '\e606';
 }

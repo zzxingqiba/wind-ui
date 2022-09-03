@@ -15,6 +15,7 @@
   }
 
   @include set-css-var-value('bezier', $bezier);
+  @include set-css-var-value('bezier-ease-in-out', $bezier-ease-in-out);
 
   @include set-component-css-var('text-color', $text-color);
   @include set-component-css-var('font-size', $font-size);

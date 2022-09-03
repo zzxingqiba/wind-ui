@@ -1,10 +1,10 @@
 <template>
-  <wd-message-provider>
-    <wd-button-group @change="changeAppear" />
+  <wd-message-provider :appear="appear">
+    <wd-button-group @click="onClick" />
   </wd-message-provider>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import WdButtonGroup from './childComponent.vue'
 
 export default defineComponent({
@@ -12,11 +12,13 @@ export default defineComponent({
     WdButtonGroup,
   },
   setup() {
-    const changeAppear = (value: string) => {
-      // console.log(value)
+    const appear = ref()
+    const onClick = (value: string) => {
+      appear.value = value
     }
     return {
-      changeAppear,
+      appear,
+      onClick,
     }
   },
 })

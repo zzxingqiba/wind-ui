@@ -1,0 +1,153 @@
+@use 'sass:map';
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'root/var' as *;
+
+@include b(message-container) {
+  z-index: 6000;
+  position: fixed;
+  height: 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include m(top) {
+    top: getCssVar('spacing', 'normal');
+    left: 0;
+    right: 0;
+  }
+
+  @include b(message-wrapper) {
+    display: flex;
+    align-items: flex-start;
+    background-color: getCssVar('color-white');
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+      0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    padding: getCssVar('spacing', 'normal') getCssVar('spacing', 'huge');
+    border-radius: getCssVar('border-radius', 'base');
+    margin: getCssVar('spacing', 'small');
+    transform-origin: top center;
+    @each $item in (success, info, warning, error) {
+      .#{$namespace}-icon-#{$item} {
+        @if $item == success {
+          color: getCssVar('color-success');
+        }
+        @if $item == info {
+          color: getCssVar('color-info');
+        }
+        @if $item == warning {
+          color: getCssVar('color-warning');
+        }
+        @if $item == error {
+          color: getCssVar('color-error');
+        }
+      }
+    }
+
+    @include b(message) {
+      display: flex;
+      align-items: center;
+      line-height: 1;
+      vertical-align: middle;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      max-width: 720px;
+      color: getCssVar('text-color', 'base');
+      font-size: getCssVar('font-size');
+
+      @include e(icon) {
+        font-size: getCssVar('font-size', 'large');
+      }
+      @include e(message) {
+        margin: 0 calc(getCssVar('spacing', 'normal') * 2);
+      }
+      @include e(close) {
+        font-size: getCssVar('font-size', 'normal');
+        margin-top: 2px;
+        padding: getCssVar('spacing', 'mini');
+        border-radius: getCssVar('border-radius', 'base');
+        transition: background-color 0.3s getCssVar('bezier');
+
+        &:active,
+        &:hover {
+          background-color: getCssVar('color-gray-bg');
+        }
+      }
+    }
+  }
+
+  .#{$namespace}-message-transition {
+    &-enter-active {
+      transition: max-height 0.3s getCssVar('bezier-ease-in-out'),
+        opacity 0.3s getCssVar('bezier-ease-in-out'),
+        margin-top 0.3s getCssVar('bezier-ease-in-out'),
+        margin-bottom 0.3s getCssVar('bezier-ease-in-out'),
+        padding-top 0.3s getCssVar('bezier-ease-in-out'),
+        padding-bottom 0.3s getCssVar('bezier-ease-in-out'),
+        transform 0.3s getCssVar('bezier-ease-in-out');
+    }
+    &-leave-active {
+      transition: max-height 0.3s getCssVar('bezier-ease-in-out'),
+        opacity 0.3s getCssVar('bezier-ease-in-out'),
+        margin-top 0.3s getCssVar('bezier-ease-in-out'),
+        margin-bottom 0.3s getCssVar('bezier-ease-in-out'),
+        padding-top 0.3s getCssVar('bezier-ease-in-out'),
+        padding-bottom 0.3s getCssVar('bezier-ease-in-out'),
+        transform 0.3s getCssVar('bezier-ease-in-out');
+    }
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      transform: scale(0.85);
+    }
+    &-leave-from,
+    &-enter-to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @include m(top) {
+    top: getCssVar('spacing', 'normal');
+    left: 0;
+    right: 0;
+    justify-content: flex-start;
+  }
+  @include m(top-left) {
+    top: getCssVar('spacing', 'normal');
+    left: getCssVar('spacing', 'large');
+    right: 0;
+    align-items: flex-start;
+  }
+  @include m(top-right) {
+    top: getCssVar('spacing', 'normal');
+    left: 0;
+    right: getCssVar('spacing', 'large');
+    align-items: flex-end;
+  }
+  @include m(bottom) {
+    bottom: getCssVar('spacing', 'normal');
+    left: 0;
+    right: 0;
+    justify-content: flex-end;
+  }
+  @include m(bottom-left) {
+    bottom: getCssVar('spacing', 'normal');
+    left: getCssVar('spacing', 'large');
+    right: 0;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  @include m(bottom-right) {
+    bottom: getCssVar('spacing', 'normal');
+    left: 0;
+    right: getCssVar('spacing', 'large');
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+}
