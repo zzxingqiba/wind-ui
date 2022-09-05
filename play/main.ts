@@ -1,8 +1,7 @@
 import { createApp } from 'vue'
 import APP from './app.vue'
-import WdButton from '@wind/components/button'
-import WdMessageProvider from '@wind/components/message'
+import WdRadio from '@wind/components/radio'
 import '@wind/theme-chalk/src/index.scss'
 const app = createApp(APP)
-app.use(WdButton).use(WdMessageProvider)
+app.use(WdRadio)
 app.mount('#app')
