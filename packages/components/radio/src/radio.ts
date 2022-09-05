@@ -1,6 +1,5 @@
-import { componentSizes } from '@wind/constants'
+import { componentSizes, Event } from '@wind/constants'
 import type { ExtractPropTypes } from 'vue'
-import { Event } from '@wind/constants'
 
 export const radioProps = {
   size: {

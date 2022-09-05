@@ -5,23 +5,30 @@
 
 $radio-box-shadow: inset 0 0 0 1px getCssVar('color-gray-bg');
 $radio-box-shadow-active: inset 0 0 0 1px getCssVar('color-primary');
-$radio-box-shadow-focus: inset 0 0 0 1px #18a058, 0 0 0 2px rgba(24, 160, 88, 0.2);
+$radio-box-shadow-focus: inset 0 0 0 1px getCssVar('color-primary'),
+  0 0 0 2px rgba(map.get($colors, 'primary', 'base'), 0.2);
+$radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
 
 @include b(radio) {
-  position: relative;
-  height: map.get($radio-height, 'default');
-  position: relative;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
+  line-height: map.get($radio-height, 'default');
   outline: none;
+  position: relative;
+  user-select: none;
   -webkit-user-select: none;
+  display: inline-flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   font-size: getCssVar('font-size');
   word-break: break-word;
 
   &:last-child {
     margin-right: 0;
+  }
+
+  &:hover {
+    .#{$namespace}-radio__dot {
+      box-shadow: $radio-box-shadow-active;
+    }
   }
 
   @include e(input) {
@@ -46,6 +53,9 @@ $radio-box-shadow-focus: inset 0 0 0 1px #18a058, 0 0 0 2px rgba(24, 160, 88, 0.
 
   @include e(dot) {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
@@ -54,25 +64,24 @@ $radio-box-shadow-focus: inset 0 0 0 1px #18a058, 0 0 0 2px rgba(24, 160, 88, 0.
     background: getCssVar('color-white');
     box-shadow: $radio-box-shadow;
     border-radius: 50%;
-    transition:
-      background-color .3s getCssVar('bezier'),
-      box-shadow .3s getCssVar('bezier');
+    transition: background-color 0.3s getCssVar('bezier'),
+      box-shadow 0.3s getCssVar('bezier');
 
     &::before {
-      content: "";
+      content: '';
       opacity: 0;
       position: absolute;
-      left: 2px;
-      top: 2px;
-      height: calc(100% - 4px);
-      width: calc(100% - 4px);
+      left: 3px;
+      top: 3px;
+      height: calc(100% - 6px);
+      width: calc(100% - 6px);
       border-radius: 50%;
-      transform: scale(.8);
-      background: getCssVar('color-primary');
-      transition:
-        opacity .3s getCssVar('bezier'),
-        background-color .3s getCssVar('bezier'),
-        transform .3s getCssVar('bezier');
+      transform: scale(0.8);
+      transform-origin: center center;
+      background-color: getCssVar('color-primary');
+      transition: opacity 0.3s getCssVar('bezier'),
+        background-color 0.3s getCssVar('bezier'),
+        transform 0.3s getCssVar('bezier');
     }
 
     & {
@@ -85,16 +94,44 @@ $radio-box-shadow-focus: inset 0 0 0 1px #18a058, 0 0 0 2px rgba(24, 160, 88, 0.
         }
       }
     }
-
-    
   }
-  @include e(focus) {
+  @include when(focus) {
     &:not(:active) {
       .#{$namespace}-radio__dot {
-        box-shadow: $radio-box-shadow-focus !important;
+        box-shadow: $radio-box-shadow-focus;
       }
     }
   }
-  @include e(label) {}
 
+  @include e(label) {
+    padding: 0 getCssVar('spacing', 'small');
+    color: getCssVar('text-color', 'base');
+    display: inline-block;
+    transition: color 0.3s getCssVar('bezier');
+  }
+  @include when(disabled) {
+    cursor: not-allowed;
+    $radio-bg-color: getCssVar('color-gray-bg');
+    .#{$namespace}-radio__dot {
+      box-shadow: $radio-box-shadow-disabled;
+      &::before {
+        background-color: getCssVar('color-gray-bg');
+      }
+    }
+    .#{$namespace}-radio__label {
+      color: getCssVar('color-gray-bg');
+    }
+    .#{$namespace}-radio__input {
+      cursor: not-allowed;
+    }
+  }
+  @each $size in (small, large) {
+    &.#{$namespace}-radio--#{$size} {
+      line-height: map.get($radio-height, $size);
+      .#{$namespace}-radio__dot {
+        height: getCssVar('font-size', $size);
+        width: getCssVar('font-size', $size);
+      }
+    }
+  }
 }

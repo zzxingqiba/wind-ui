@@ -5,12 +5,14 @@
       :value="label"
       :class="ns.e('input')"
       type="radio"
+      :disabled="disabled"
       @change="hanleChange"
       @focus="handleRadioInputFocus"
       @blur="handleRadioInputBlur"
     />
     <div :class="ns.e('dot-wrapper')">
-      <span :class="dotKls" />
+      &nbsp;
+      <div :class="dotKls" />
     </div>
     <div :class="labelKls">
       <slot>
@@ -32,7 +34,12 @@ export default defineComponent({
   setup(props, { emit }) {
     const ns = useNamespace('radio')
     const focusRef = ref(false)
-    const radioKls = computed(() => [ns.b(), ns.is('focus', focusRef.value)])
+    const radioKls = computed(() => [
+      ns.b(),
+      ns.m(props.size),
+      ns.is('focus', focusRef.value),
+      ns.is('disabled', props.disabled),
+    ])
     const labelKls = computed(() => [ns.e('label')])
     const dotKls = computed(() => [
       ns.e('dot'),
