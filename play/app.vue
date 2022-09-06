@@ -15,7 +15,7 @@
   <!-- wd-radio-group -->
   <div style="margin-top: 10px">
     {{ radio3 }}
-    <wd-radio-group v-model="radio3" disabled>
+    <wd-radio-group v-model="radio3" size="large">
       <wd-radio label="text3"></wd-radio>
       <wd-radio label="text4"></wd-radio>
     </wd-radio-group>

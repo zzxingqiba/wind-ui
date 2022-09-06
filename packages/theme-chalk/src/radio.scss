@@ -119,6 +119,13 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     .#{$namespace}-radio__input {
       cursor: not-allowed;
     }
+    @include when(focus) {
+      &:not(:active) {
+        .#{$namespace}-radio__dot {
+          box-shadow: $radio-box-shadow;
+        }
+      }
+    }
   }
   @each $size in (small, large) {
     &.#{$namespace}-radio--#{$size} {
