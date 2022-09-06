@@ -10,16 +10,18 @@ $radio-box-shadow-focus: inset 0 0 0 1px getCssVar('color-primary'),
 $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
 
 @include b(radio) {
-  line-height: map.get($radio-height, 'default');
+  height: map.get($radio-height, 'default');
   outline: none;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
   display: inline-flex;
-  align-items: flex-start;
-  flex-wrap: nowrap;
+  align-items: center;
+  white-space: nowrap;
+  outline: none;
   font-size: getCssVar('font-size');
-  word-break: break-word;
+  line-height: 1;
+  margin-right: getCssVar('spacing', 'normal');
 
   &:last-child {
     margin-right: 0;
@@ -45,20 +47,16 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   }
 
   @include e(dot-wrapper) {
-    position: relative;
-    flex-shrink: 0;
-    flex-grow: 0;
-    width: getCssVar('font-size');
-  }
-
-  @include e(dot) {
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+  }
+
+  @include e(dot) {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: getCssVar('font-size');
     width: getCssVar('font-size');
     background: getCssVar('color-white');
@@ -70,9 +68,7 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     &::before {
       content: '';
       opacity: 0;
-      position: absolute;
-      left: 3px;
-      top: 3px;
+
       height: calc(100% - 6px);
       width: calc(100% - 6px);
       border-radius: 50%;
@@ -106,7 +102,6 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   @include e(label) {
     padding: 0 getCssVar('spacing', 'small');
     color: getCssVar('text-color', 'base');
-    display: inline-block;
     transition: color 0.3s getCssVar('bezier');
   }
   @include when(disabled) {
@@ -127,7 +122,8 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   }
   @each $size in (small, large) {
     &.#{$namespace}-radio--#{$size} {
-      line-height: map.get($radio-height, $size);
+      height: map.get($radio-height, 'default');
+      font-size: getCssVar('font-size', $size);
       .#{$namespace}-radio__dot {
         height: getCssVar('font-size', $size);
         width: getCssVar('font-size', $size);

@@ -3,15 +3,15 @@
     <input
       ref="radio"
       :value="label"
+      :checked="renderSafeChecked"
       :class="ns.e('input')"
       type="radio"
       :disabled="disabled"
-      @change="hanleChange"
+      @change="handleChange"
       @focus="handleRadioInputFocus"
       @blur="handleRadioInputBlur"
     />
     <div :class="ns.e('dot-wrapper')">
-      &nbsp;
       <div :class="dotKls" />
     </div>
     <div :class="labelKls">
@@ -23,10 +23,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 import { useNamespace } from '@wind/hooks/use-namespace'
 import { radioProps, radioEmits } from './radio'
 import { Event } from '@wind/constants'
+import { radioGroupApiInjectionKey } from './context'
+import type { RadioGroupInjection } from './radio-group'
+import { createInjectionKey } from '@wind/utils'
 export default defineComponent({
   name: 'WdRadio',
   props: radioProps,
@@ -36,18 +39,34 @@ export default defineComponent({
     const focusRef = ref(false)
     const radioKls = computed(() => [
       ns.b(),
-      ns.m(props.size),
+      ns.m(mergeSize.value),
       ns.is('focus', focusRef.value),
-      ns.is('disabled', props.disabled),
+      ns.is('disabled', mergeDisabled.value),
     ])
     const labelKls = computed(() => [ns.e('label')])
     const dotKls = computed(() => [
       ns.e('dot'),
-      ns.is('check', props.modelValue == props.label),
+      ns.is('check', renderSafeChecked.value),
     ])
 
     const radioRef = ref<HTMLInputElement>()
-    const value = ref()
+
+    const RadioGroup = inject(
+      createInjectionKey<RadioGroupInjection>(radioGroupApiInjectionKey),
+      null
+    )
+
+    const mergeDisabled = computed(() => {
+      if (props.disabled) return props.disabled
+      if (RadioGroup) return RadioGroup.disabledRef.value
+      return false
+    })
+
+    const mergeSize = computed(() => {
+      if (props.size) return props.size
+      if (RadioGroup) return RadioGroup.mergedSizeRef.value
+      return ''
+    })
 
     const handleRadioInputBlur = () => {
       focusRef.value = false
@@ -55,12 +74,26 @@ export default defineComponent({
     const handleRadioInputFocus = () => {
       focusRef.value = true
     }
+    const singleCheckedRef = computed(() => props.modelValue == props.label)
 
-    const hanleChange = () => {
-      if (props.modelValue != props.label) {
-        emit(Event.UPDATE_MODEL_EVENT, props.label)
-        radioRef.value!.checked = props.modelValue == props.label
+    const renderSafeChecked = computed(() => {
+      // group
+      if (RadioGroup) return RadioGroup.modelValueRef.value == props.label
+      return singleCheckedRef.value
+    })
+
+    const toggle = () => {
+      if (mergeDisabled.value) return
+      if (RadioGroup) {
+        RadioGroup.UpdateValue(props.label)
+        return
       }
+      emit(Event.UPDATE_MODEL_EVENT, props.label)
+      emit(Event.CHANGE_EVENT, props.label)
+    }
+
+    const handleChange = () => {
+      toggle()
     }
 
     return {
@@ -69,8 +102,8 @@ export default defineComponent({
       labelKls,
       dotKls,
       radio: radioRef,
-      value,
-      hanleChange,
+      renderSafeChecked,
+      handleChange,
       handleRadioInputBlur,
       handleRadioInputFocus,
     }

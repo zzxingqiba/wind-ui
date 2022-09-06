@@ -1,5 +1,6 @@
 import { componentSizes, Event } from '@wind/constants'
 import type { ExtractPropTypes } from 'vue'
+import { definePropType } from '@wind/utils'
 
 export const radioProps = {
   size: {
@@ -8,12 +9,12 @@ export const radioProps = {
     required: false,
   },
   modelValue: {
-    type: [String, Number, Boolean],
+    type: definePropType<string | number | boolean>([String, Number, Boolean]),
     default: '',
   },
   disabled: Boolean,
   label: {
-    type: [String, Number, Boolean],
+    type: definePropType<string | number | boolean>([String, Number, Boolean]),
     default: '',
   },
   name: {
