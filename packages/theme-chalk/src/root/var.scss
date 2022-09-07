@@ -10,43 +10,43 @@ $colors: map.deep-merge(
     'white': #ffffff,
     'black': #000000,
     'primary': (
-      'base': #2080f0,
-      'light-1': #4098fc,
-      'light-2': #cee3fc,
-      'light-3': #e2eefd,
-      'dark-1': #2080f0,
-      'dark-2': #c3ddfb,
+      'base': #4e7ca1,
+      'light-1': #158bb8,
+      'light-2': #8abcd1,
+      'light-3': #baccd9,
+      'dark-1': #277586,
+      'dark-2': #8fb2c9,
     ),
     'success': (
-      'base': #18a058,
-      'light-1': #36ad6a,
-      'light-2': #b3eacb,
-      'light-3': #dcf3e6,
-      'dark-1': #529b2e,
-      'dark-2': #9de5bc,
+      'base': #428675,
+      'light-1': #2c9678,
+      'light-2': #5dbe8a,
+      'light-3': #a4cab6,
+      'dark-1': #248067,
+      'dark-2': #69a794,
     ),
     'warning': (
-      'base': #f0a020,
-      'light-1': #fcb040,
-      'light-2': #f9ddb5,
+      'base': #f9a633,
+      'light-1': #feba07,
+      'light-2': #fccb16,
       'light-3': #f7e8d2,
-      'dark-1': #c97c10,
+      'dark-1': #daa45a,
       'dark-2': #f5d4a4,
     ),
     'error': (
-      'base': #d03050,
+      'base': #c21f30,
       'light-1': #de576d,
       'light-2': #f5dade,
       'light-3': #f2eaeb,
-      'dark-1': #ab1f3f,
+      'dark-1': #a7535a,
       'dark-2': #f0b7bf,
     ),
     'info': (
-      'base': #1f1f23,
-      'light-1': #3d3d44,
+      'base': #3e3b31,
+      'light-1': #000013,
       'light-2': #bdbdd0,
       'light-3': #e1e1f0,
-      'dark-1': #2f2e30,
+      'dark-1': #2d2d30,
       'dark-2': #c3c3cf,
     ),
   ),
@@ -56,7 +56,7 @@ $colors: map.deep-merge(
 // Base-Color
 $color-white: #ffffff;
 $color-black: #000000;
-$color-gray-bg: #eceded;
+$color-gray-bg: #baccd9;
 
 // Bezier
 $bezier: cubic-bezier(0, 0, 0.2, 1);
@@ -66,7 +66,7 @@ $text-color: () !default;
 $text-color: map.merge(
   (
     'base': #606266,
-    'disabled':#a8abb2
+    'disabled': #a8abb2,
   ),
   $text-color
 );
