@@ -14,10 +14,17 @@
 
   <!-- wd-radio-group -->
   <div style="margin-top: 10px">
-    {{ radio3 }}
-    <wd-radio-group v-model="radio3" size="large">
-      <wd-radio label="text3"></wd-radio>
+    <wd-radio-group v-model="radio3" size="large" @change="onChangeRadio">
+      <wd-radio v-model="radio1" label="text3"></wd-radio>
       <wd-radio label="text4"></wd-radio>
+    </wd-radio-group>
+  </div>
+
+  <!-- wd-radio-group -->
+  <div style="margin-top: 10px">
+    <wd-radio-group v-model="radio3" size="large" @change="onChangeRadio">
+      <wd-radio-button label="text3"></wd-radio-button>
+      <wd-radio-button label="text4"></wd-radio-button>
     </wd-radio-group>
   </div>
 </template>
@@ -28,8 +35,9 @@ export default defineComponent({
   setup() {
     const radio1Ref = ref('text2')
     const disabled = ref(true)
+
     const onChangeRadio: <T>(val: T) => void = (val) => {
-      // console.log(val)
+      console.log(val)
     }
     const onChangeSwitch: <T>(val: T) => void = (val) => {
       radio1Ref.value = 'text2'

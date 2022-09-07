@@ -2,11 +2,12 @@
   <label :class="radioKls">
     <input
       ref="radio"
+      type="radio"
       :value="label"
       :checked="renderSafeChecked"
       :class="ns.e('input')"
-      type="radio"
       :disabled="disabled"
+      :name="name"
       @change="handleChange"
       @focus="handleRadioInputFocus"
       @blur="handleRadioInputBlur"
@@ -49,22 +50,20 @@ export default defineComponent({
       ns.is('check', renderSafeChecked.value),
     ])
 
-    const radioRef = ref<HTMLInputElement>()
-
-    const RadioGroup = inject(
+    const radioGroup = inject(
       createInjectionKey<RadioGroupInjection>(radioGroupApiInjectionKey),
       null
     )
 
     const mergeDisabled = computed(() => {
       if (props.disabled) return props.disabled
-      if (RadioGroup) return RadioGroup.disabledRef.value
+      if (radioGroup) return radioGroup.disabledRef.value
       return false
     })
 
     const mergeSize = computed(() => {
       if (props.size) return props.size
-      if (RadioGroup) return RadioGroup.mergedSizeRef.value
+      if (radioGroup) return radioGroup.mergedSizeRef.value
       return ''
     })
 
@@ -78,14 +77,14 @@ export default defineComponent({
 
     const renderSafeChecked = computed(() => {
       // group
-      if (RadioGroup) return RadioGroup.modelValueRef.value == props.label
+      if (radioGroup) return radioGroup.modelValueRef.value == props.label
       return singleCheckedRef.value
     })
 
     const toggle = () => {
       if (mergeDisabled.value) return
-      if (RadioGroup) {
-        RadioGroup.UpdateValue(props.label)
+      if (radioGroup) {
+        radioGroup.UpdateValue(props.label)
         return
       }
       emit(Event.UPDATE_MODEL_EVENT, props.label)
@@ -101,8 +100,8 @@ export default defineComponent({
       radioKls,
       labelKls,
       dotKls,
-      radio: radioRef,
       renderSafeChecked,
+      radioGroup,
       handleChange,
       handleRadioInputBlur,
       handleRadioInputFocus,

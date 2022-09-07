@@ -1,0 +1,84 @@
+@use 'sass:map';
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'root/var' as *;
+
+$radio-box-shadow: 0 0 0 1px getCssVar('color-gray-bg');
+$radio-box-shadow-active:  0 0 0 1px getCssVar('color-primary');
+$radio-box-shadow-focus:  0 0 0 1px getCssVar('color-primary'),
+  0 0 0 2px rgba(map.get($colors, 'primary', 'base'), 0.2);
+$radio-box-shadow-disabled:  0 0 0 1px getCssVar('color-gray-bg');
+
+@include b(radio-button) {
+  height: map.get($radio-height, 'default');
+  outline: none;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  outline: none;
+  font-size: getCssVar('font-size');
+  line-height: 1;
+  
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @include e(input) {
+    position: absolute;
+    border: 0;
+    border-radius: inherit;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  @include e(inner) {
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    background: getCssVar('color-white');
+    color: getCssVar('text-color', 'base');
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    padding: getCssVar('spacing', 'normal');
+    box-shadow: $radio-box-shadow;
+    @include when(check) {
+      box-shadow: $radio-box-shadow-active;
+      z-index: 1;
+      color: getCssVar('color-primary');
+    }
+    @include when(focus) {
+      &:not(:active) {
+       
+          box-shadow: $radio-box-shadow-focus;
+       
+      }
+    }
+    
+  }
+  
+
+  &:first-child {
+    .#{$namespace}-radio-button__inner {
+      border-radius: getCssVar('border-radius', 'base') 0 0 getCssVar('border-radius', 'base');
+    }
+  }
+
+  &:last-child {
+    .#{$namespace}-radio-button__inner {
+      border-radius: 0 getCssVar('border-radius', 'base') getCssVar('border-radius', 'base') 0;
+    }
+  }
+}

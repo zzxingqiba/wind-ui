@@ -7,15 +7,15 @@ import { provide, toRef } from 'vue'
 import { useNamespace } from '@wind/hooks/use-namespace'
 import { createInjectionKey } from '@wind/utils'
 import { radioGroupApiInjectionKey } from './context'
-import { radioGroupProps } from './radio-group'
+import { radioGroupProps, radioGroupEmits } from './radio-group'
 import type { RadioGroupInjection } from './radio-group'
 import { Event } from '@wind/constants'
 export default {
   name: 'WdRadioGroup',
   props: radioGroupProps,
+  emits: radioGroupEmits,
   setup(props, { emit }) {
     const ns = useNamespace('radio-group')
-
     provide(
       createInjectionKey<RadioGroupInjection>(radioGroupApiInjectionKey),
       {
