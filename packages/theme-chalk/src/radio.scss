@@ -53,7 +53,6 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   }
 
   @include e(dot) {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,7 +105,6 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   }
   @include when(disabled) {
     cursor: not-allowed;
-    $radio-bg-color: getCssVar('color-gray-bg');
     .#{$namespace}-radio__dot {
       box-shadow: $radio-box-shadow-disabled;
       &::before {
@@ -129,7 +127,7 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   }
   @each $size in (small, large) {
     &.#{$namespace}-radio--#{$size} {
-      height: map.get($radio-height, 'default');
+      height: map.get($radio-height, $size);
       font-size: getCssVar('font-size', $size);
       .#{$namespace}-radio__dot {
         height: getCssVar('font-size', $size);

@@ -1,6 +1,7 @@
 ## Play Message
 
 ## entry main.ts
+
 import { createApp } from 'vue'
 import APP from './app.vue'
 import WdButton from '@wind/components/button'
@@ -11,6 +12,7 @@ app.use(WdButton).use(WdMessageProvider)
 app.mount('#app')
 
 ## test app.vue
+
 <template>
   <wd-message-provider :appear="appear">
     <wd-button-group @click="onClick" />
@@ -21,23 +23,24 @@ import { defineComponent, ref } from 'vue'
 import WdButtonGroup from './childComponent.vue'
 
 export default defineComponent({
-  components: {
-    WdButtonGroup,
-  },
-  setup() {
-    const appear = ref()
-    const onClick = (value: string) => {
-      appear.value = value
-    }
-    return {
-      appear,
-      onClick,
-    }
-  },
+components: {
+WdButtonGroup,
+},
+setup() {
+const appear = ref()
+const onClick = (value: string) => {
+appear.value = value
+}
+return {
+appear,
+onClick,
+}
+},
 })
 </script>
 
 ## test childComponent.vue
+
 <script lang="ts">
 import { defineComponent, h } from 'vue'
 import { useMessage } from '@wind/components/message'

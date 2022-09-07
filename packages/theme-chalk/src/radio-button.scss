@@ -4,10 +4,10 @@
 @use 'root/var' as *;
 
 $radio-box-shadow: 0 0 0 1px getCssVar('color-gray-bg');
-$radio-box-shadow-active:  0 0 0 1px getCssVar('color-primary');
-$radio-box-shadow-focus:  0 0 0 1px getCssVar('color-primary'),
+$radio-box-shadow-active: 0 0 0 1px getCssVar('color-primary');
+$radio-box-shadow-focus: 0 0 0 1px getCssVar('color-primary'),
   0 0 0 2px rgba(map.get($colors, 'primary', 'base'), 0.2);
-$radio-box-shadow-disabled:  0 0 0 1px getCssVar('color-gray-bg');
+$radio-box-shadow-disabled: 0 0 0 1px getCssVar('color-gray-bg');
 
 @include b(radio-button) {
   height: map.get($radio-height, 'default');
@@ -21,8 +21,6 @@ $radio-box-shadow-disabled:  0 0 0 1px getCssVar('color-gray-bg');
   outline: none;
   font-size: getCssVar('font-size');
   line-height: 1;
-  
-
   &:last-child {
     margin-right: 0;
   }
@@ -52,8 +50,9 @@ $radio-box-shadow-disabled:  0 0 0 1px getCssVar('color-gray-bg');
     outline: none;
     cursor: pointer;
     user-select: none;
-    padding: getCssVar('spacing', 'normal');
+    padding: getCssVar('spacing', 'normal') getCssVar('spacing', 'normal');
     box-shadow: $radio-box-shadow;
+    transition: box-shadow 0.3s getCssVar('bezier');
     @include when(check) {
       box-shadow: $radio-box-shadow-active;
       z-index: 1;
@@ -61,24 +60,61 @@ $radio-box-shadow-disabled:  0 0 0 1px getCssVar('color-gray-bg');
     }
     @include when(focus) {
       &:not(:active) {
-       
-          box-shadow: $radio-box-shadow-focus;
-       
+        box-shadow: $radio-box-shadow-focus;
       }
     }
-    
   }
-  
 
   &:first-child {
     .#{$namespace}-radio-button__inner {
-      border-radius: getCssVar('border-radius', 'base') 0 0 getCssVar('border-radius', 'base');
+      border-radius: getCssVar('border-radius', 'base') 0 0
+        getCssVar('border-radius', 'base');
     }
   }
 
   &:last-child {
     .#{$namespace}-radio-button__inner {
-      border-radius: 0 getCssVar('border-radius', 'base') getCssVar('border-radius', 'base') 0;
+      border-radius: 0 getCssVar('border-radius', 'base')
+        getCssVar('border-radius', 'base') 0;
+    }
+  }
+  &:first-child:last-child {
+    .#{$namespace}-radio-button__inner {
+      border-radius: getCssVar('border-radius', 'base');
+    }
+  }
+
+  @each $size in (small, large) {
+    &.#{$namespace}-radio-button--#{$size} {
+      height: map.get($radio-height, $size);
+      font-size: getCssVar('font-size', $size);
+      .#{$namespace}-radio-button__inner {
+        @if $size == 'small' {
+          padding: getCssVar('spacing', $size) getCssVar('spacing', 'normal');
+        }
+      }
+    }
+  }
+
+  @include when(disabled) {
+    cursor: not-allowed;
+    @include when(check) {
+      box-shadow: $radio-box-shadow-disabled;
+      z-index: 1;
+      color: getCssVar('color-primary');
+    }
+    @include when(focus) {
+      &:not(:active) {
+        box-shadow: $radio-box-shadow-disabled;
+      }
+    }
+    .#{$namespace}-radio-button__input {
+      cursor: not-allowed;
+    }
+    .#{$namespace}-radio-button__inner {
+      color: getCssVar('color-gray-bg');
+      box-shadow: $radio-box-shadow-disabled;
+      cursor: not-allowed;
     }
   }
 }

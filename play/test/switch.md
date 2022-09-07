@@ -189,9 +189,7 @@ export default defineComponent({
       switchRef,
       onChangeTheme,
     }
-  },
+
+},
 })
 </script>
-
-
-

@@ -38,13 +38,12 @@ export default defineComponent({
     const radioButtonKls = computed(() => [
       ns.b(),
       ns.m(mergeSize.value),
-
       ns.is('disabled', mergeDisabled.value),
     ])
     const innerKls = computed(() => [
       ns.e('inner'),
       ns.is('check', renderSafeChecked.value),
-      ns.is('focus', focusRef.value),
+      ns.is('focus', !mergeDisabled.value && focusRef.value),
     ])
     const radioGroup = inject(
       createInjectionKey<RadioGroupInjection>(radioGroupApiInjectionKey),

@@ -3,14 +3,14 @@
 </template>
 
 <script lang="ts">
-import { provide, toRef } from 'vue'
+import { defineComponent, provide, toRef } from 'vue'
 import { useNamespace } from '@wind/hooks/use-namespace'
 import { createInjectionKey } from '@wind/utils'
 import { radioGroupApiInjectionKey } from './context'
 import { radioGroupProps, radioGroupEmits } from './radio-group'
 import type { RadioGroupInjection } from './radio-group'
 import { Event } from '@wind/constants'
-export default {
+export default defineComponent({
   name: 'WdRadioGroup',
   props: radioGroupProps,
   emits: radioGroupEmits,
@@ -32,5 +32,5 @@ export default {
       ns,
     }
   },
-}
+})
 </script>

@@ -41,7 +41,7 @@ export default defineComponent({
     const radioKls = computed(() => [
       ns.b(),
       ns.m(mergeSize.value),
-      ns.is('focus', focusRef.value),
+      ns.is('focus', !mergeDisabled.value && focusRef.value),
       ns.is('disabled', mergeDisabled.value),
     ])
     const labelKls = computed(() => [ns.e('label')])
