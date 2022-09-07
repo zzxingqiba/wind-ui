@@ -10,43 +10,43 @@ $colors: map.deep-merge(
     'white': #ffffff,
     'black': #000000,
     'primary': (
-      'base': #2080f0,
-      'light-1': #4098fc,
-      'light-2': #cee3fc,
-      'light-3': #e2eefd,
-      'dark-1': #2080f0,
-      'dark-2': #c3ddfb,
+      'base': #4e7ca1,
+      'light-1': #158bb8,
+      'light-2': #8abcd1,
+      'light-3': #baccd9,
+      'dark-1': #277586,
+      'dark-2': #8fb2c9,
     ),
     'success': (
-      'base': #18a058,
-      'light-1': #36ad6a,
-      'light-2': #b3eacb,
-      'light-3': #dcf3e6,
-      'dark-1': #529b2e,
-      'dark-2': #9de5bc,
+      'base': #428675,
+      'light-1': #2c9678,
+      'light-2': #5dbe8a,
+      'light-3': #a4cab6,
+      'dark-1': #248067,
+      'dark-2': #69a794,
     ),
     'warning': (
-      'base': #f0a020,
-      'light-1': #fcb040,
-      'light-2': #f9ddb5,
+      'base': #f9a633,
+      'light-1': #feba07,
+      'light-2': #fccb16,
       'light-3': #f7e8d2,
-      'dark-1': #c97c10,
+      'dark-1': #daa45a,
       'dark-2': #f5d4a4,
     ),
     'error': (
-      'base': #d03050,
+      'base': #C21F30,
       'light-1': #de576d,
       'light-2': #f5dade,
       'light-3': #f2eaeb,
-      'dark-1': #ab1f3f,
+      'dark-1': #A7535A,
       'dark-2': #f0b7bf,
     ),
     'info': (
-      'base': #1f1f23,
-      'light-1': #3d3d44,
+      'base': #3E3B31,
+      'light-1': #000013,
       'light-2': #bdbdd0,
       'light-3': #e1e1f0,
-      'dark-1': #2f2e30,
+      'dark-1': #2D2D30,
       'dark-2': #c3c3cf,
     ),
   ),
@@ -56,17 +56,18 @@ $colors: map.deep-merge(
 // Base-Color
 $color-white: #ffffff;
 $color-black: #000000;
-$color-gray-bg: #eceded;
+$color-gray-bg: #BACCd9;
 
 // Bezier
 $bezier: cubic-bezier(0, 0, 0.2, 1);
+$bezier-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Text-Color
 $text-color: () !default;
 $text-color: map.merge(
   (
     'base': #606266,
-    'disabled':#a8abb2
+    'disabled': #a8abb2,
   ),
   $text-color
 );
@@ -75,8 +76,8 @@ $text-color: map.merge(
 $font-size: () !default;
 $font-size: map.merge(
   (
-    'mini': 12px,
-    'small': 13px,
+    'mini': 10px,
+    'small': 12px,
     '': 14px,
     'medium': 16px,
     'large': 18px,
@@ -132,6 +133,32 @@ $spacing: map.merge(
   $spacing
 );
 
+// common-size
+$common-size: () !default;
+$common-size: map.merge(
+  (
+    'large': 40px,
+    'default': 32px,
+    'small': 24px,
+  ),
+  $common-size
+);
+
+// box-shadow
+$box-shadow: () !default;
+$box-shadow: map.merge(
+  (
+    'gray': (
+      0 0 0 2px getCssVar('color-gray-bg'),
+    ),
+    'primary': (
+      0 0 0 2px getCssVar('color-primary'),
+    ),
+  ),
+  $box-shadow
+);
+
+// Button
 $button: () !default;
 $button: map.merge(
   (
@@ -149,3 +176,22 @@ $button: map.merge(
   ),
   $button
 );
+
+// Switch
+$switch: () !default;
+$switch: map.merge(
+  (
+    'on-color': getCssVar('color-primary'),
+    'off-color': getCssVar('color-gray-bg'),
+    'ball-box-shadow': (
+      0 1px 4px 0 rgba(0, 0, 0, 0.3),
+      inset 0 0 1px 0 rgba(0, 0, 0, 0.05),
+    ),
+    'ball-color': getCssVar('color-white'),
+  ),
+  $switch
+);
+
+// Radio
+$radio-height: () !default;
+$radio-height: map.merge($common-size, $radio-height);
