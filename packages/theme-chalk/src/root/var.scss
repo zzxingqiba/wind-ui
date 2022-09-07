@@ -56,7 +56,7 @@ $colors: map.deep-merge(
 // Base-Color
 $color-white: #ffffff;
 $color-black: #000000;
-$color-gray-bg: (0, 0, 0, 0.14);
+$color-gray-bg: rgba(0, 0, 0, 0.14);
 
 // Bezier
 $bezier: cubic-bezier(0, 0, 0.2, 1);
