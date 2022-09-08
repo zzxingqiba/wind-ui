@@ -115,18 +115,15 @@
       font-size: getCssVar('font-size');
       @if $size == mini {
         font-size: getCssVar('font-size', 'mini');
-        padding: getCssVar('spacing', 'mini')
-          getCssVar('spacing', 'mini');
+        padding: getCssVar('spacing', 'mini') getCssVar('spacing', 'mini');
       }
       @if $size == small {
         font-size: getCssVar('font-size', 'small');
-        padding: getCssVar('spacing', 'small')
-          getCssVar('spacing', 'small');
+        padding: getCssVar('spacing', 'small') getCssVar('spacing', 'small');
       }
       @if $size == large {
         font-size: getCssVar('font-size', 'large');
-        padding: getCssVar('spacing', 'normal')
-          getCssVar('spacing', 'large');
+        padding: getCssVar('spacing', 'normal') getCssVar('spacing', 'large');
       }
       @include when(circle) {
         padding: getCssVar('spacing', $size);

@@ -24,20 +24,26 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useNamespace } from '@wind/hooks/use-namespace'
 import { radioProps, radioEmits } from './radio'
-import { Event } from '@wind/constants'
-import { radioGroupApiInjectionKey } from './context'
-import type { RadioGroupInjection } from './radio-group'
-import { createInjectionKey } from '@wind/utils'
+import { useRadio } from './context'
 export default defineComponent({
   name: 'WdRadio',
   props: radioProps,
   emits: radioEmits,
   setup(props, { emit }) {
     const ns = useNamespace('radio')
-    const focusRef = ref(false)
+
+    const {
+      focusRef,
+      radioGroup,
+      mergeDisabled,
+      handleChange,
+      handleRadioInputFocus,
+      handleRadioInputBlur,
+    } = useRadio(props, emit)
+
     const radioKls = computed(() => [
       ns.b(),
       ns.m(mergeSize.value),
@@ -50,29 +56,12 @@ export default defineComponent({
       ns.is('check', renderSafeChecked.value),
     ])
 
-    const radioGroup = inject(
-      createInjectionKey<RadioGroupInjection>(radioGroupApiInjectionKey),
-      null
-    )
-
-    const mergeDisabled = computed(() => {
-      if (props.disabled) return props.disabled
-      if (radioGroup) return radioGroup.disabledRef.value
-      return false
-    })
-
     const mergeSize = computed(() => {
       if (props.size) return props.size
       if (radioGroup) return radioGroup.mergedSizeRef.value
       return ''
     })
 
-    const handleRadioInputBlur = () => {
-      focusRef.value = false
-    }
-    const handleRadioInputFocus = () => {
-      focusRef.value = true
-    }
     const singleCheckedRef = computed(() => props.modelValue == props.label)
 
     const renderSafeChecked = computed(() => {
@@ -80,20 +69,6 @@ export default defineComponent({
       if (radioGroup) return radioGroup.modelValueRef.value == props.label
       return singleCheckedRef.value
     })
-
-    const toggle = () => {
-      if (mergeDisabled.value) return
-      if (radioGroup) {
-        radioGroup.UpdateValue(props.label)
-        return
-      }
-      emit(Event.UPDATE_MODEL_EVENT, props.label)
-      emit(Event.CHANGE_EVENT, props.label)
-    }
-
-    const handleChange = () => {
-      toggle()
-    }
 
     return {
       ns,

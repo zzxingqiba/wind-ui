@@ -21,56 +21,47 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useNamespace } from '@wind/hooks/use-namespace'
-import { Event } from '@wind/constants'
-import { radioGroupApiInjectionKey } from './context'
-import type { RadioGroupInjection } from './radio-group'
-import { createInjectionKey } from '@wind/utils'
+import { useRadio } from './context'
 import { radioButtonProps, radioButtonEmits } from './radio-button'
+import { Event } from '@wind/constants'
 export default defineComponent({
   name: 'WdRadioButton',
   props: radioButtonProps,
   emits: radioButtonEmits,
   setup(props, { emit }) {
     const ns = useNamespace('radio-button')
-    const focusRef = ref(false)
+
+    const {
+      focusRef,
+      radioGroup,
+      mergeDisabled,
+      handleRadioInputFocus,
+      handleRadioInputBlur,
+    } = useRadio(props)
+
     const radioButtonKls = computed(() => [
       ns.b(),
       ns.m(mergeSize.value),
       ns.is('disabled', mergeDisabled.value),
     ])
+
     const innerKls = computed(() => [
       ns.e('inner'),
       ns.is('check', renderSafeChecked.value),
       ns.is('focus', !mergeDisabled.value && focusRef.value),
     ])
-    const radioGroup = inject(
-      createInjectionKey<RadioGroupInjection>(radioGroupApiInjectionKey),
-      null
-    )
-
-    const mergeDisabled = computed(() => {
-      if (props.disabled) return props.disabled
-      if (radioGroup) return radioGroup.disabledRef.value
-      return false
-    })
 
     const mergeSize = computed(() => {
       if (radioGroup) return radioGroup.mergedSizeRef.value
       return ''
     })
 
-    const handleRadioInputBlur = () => {
-      focusRef.value = false
-    }
-    const handleRadioInputFocus = () => {
-      focusRef.value = true
-    }
-
     const renderSafeChecked = computed(() => {
       // group
       if (radioGroup) return radioGroup.modelValueRef.value == props.label
+      // button cannot be used alone
       return false
     })
 
@@ -80,13 +71,13 @@ export default defineComponent({
         radioGroup.UpdateValue(props.label)
         return
       }
-      emit(Event.UPDATE_MODEL_EVENT, props.label)
       emit(Event.CHANGE_EVENT, props.label)
     }
 
     const handleChange = () => {
       toggle()
     }
+
     return {
       ns,
       radioButtonKls,

@@ -136,3 +136,10 @@ $radio-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     }
   }
 }
+
+@include b(radio-group) {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0;
+}

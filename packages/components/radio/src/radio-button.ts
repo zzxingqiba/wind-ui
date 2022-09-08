@@ -1,21 +1,12 @@
 import type { ExtractPropTypes } from 'vue'
 import { Event } from '@wind/constants'
-import { definePropType } from '@wind/utils'
+import { baseRadioProps } from './radio'
 
 export const radioButtonProps = {
-  label: {
-    type: definePropType<string | number | boolean>([String, Number, Boolean]),
-    default: '',
-  },
-  disabled: Boolean,
-  name: {
-    type: String,
-    default: '',
-  },
+  ...baseRadioProps,
 }
 
 export const radioButtonEmits = {
-  [Event.UPDATE_MODEL_EVENT]: <T>(value: T) => value,
   [Event.CHANGE_EVENT]: <T>(value: T) => value,
 }
 

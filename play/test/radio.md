@@ -1,3 +1,18 @@
+## Play Radio | Radio-Button | Radio-Group
+
+## entry main.ts
+
+import { createApp } from 'vue'
+import APP from './app.vue'
+import WdRadio, { WdRadioGroup, WdRadioButton } from '@wind/components/radio'
+import WdSwitch from '@wind/components/switch'
+import '@wind/theme-chalk/src/index.scss'
+const app = createApp(APP)
+app.use(WdRadio).use(WdSwitch).use(WdRadioGroup).use(WdRadioButton)
+app.mount('#app')
+
+## test app.vue
+
 <template>
   <!-- size: large | null | small -->
   <div>
@@ -85,16 +100,16 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup() {
-    const radio1Ref = ref()
-    const radio2Ref = ref()
-    const radio3Ref = ref()
-    const radio4Ref = ref('wind')
-    const radio5Ref = ref()
-    const radio6Ref = ref()
-    const radio7Ref = ref()
-    const radio8Ref = ref()
-    const disabled = ref(false)
+setup() {
+const radio1Ref = ref()
+const radio2Ref = ref()
+const radio3Ref = ref()
+const radio4Ref = ref('wind')
+const radio5Ref = ref()
+const radio6Ref = ref()
+const radio7Ref = ref()
+const radio8Ref = ref()
+const disabled = ref(false)
 
     const onChangeRadio: <T>(val: T) => void = (val) => {
       console.log(val)
@@ -115,6 +130,7 @@ export default defineComponent({
       disabled,
       onChangeRadio,
     }
-  },
+
+},
 })
 </script>

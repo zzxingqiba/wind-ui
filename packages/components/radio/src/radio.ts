@@ -2,6 +2,18 @@ import { componentSizes, Event } from '@wind/constants'
 import type { ExtractPropTypes } from 'vue'
 import { definePropType } from '@wind/utils'
 
+export const baseRadioProps = {
+  label: {
+    type: definePropType<string | number | boolean>([String, Number, Boolean]),
+    default: '',
+  },
+  name: {
+    type: String,
+    default: '',
+  },
+  disabled: Boolean,
+}
+
 export const radioProps = {
   size: {
     type: String,
@@ -12,15 +24,7 @@ export const radioProps = {
     type: definePropType<string | number | boolean>([String, Number, Boolean]),
     default: '',
   },
-  disabled: Boolean,
-  label: {
-    type: definePropType<string | number | boolean>([String, Number, Boolean]),
-    default: '',
-  },
-  name: {
-    type: String,
-    default: '',
-  },
+  ...baseRadioProps,
 }
 
 export const radioEmits = {
@@ -28,4 +32,6 @@ export const radioEmits = {
   [Event.CHANGE_EVENT]: <T>(value: T) => value,
 }
 
+export type RadioEmits = typeof radioEmits
+export type BaseRadioProps = ExtractPropTypes<typeof baseRadioProps>
 export type RadioProps = ExtractPropTypes<typeof radioProps>
