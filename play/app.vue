@@ -1,84 +1,15 @@
 <template>
-  <!-- size: large | null | small -->
   <div>
-    <wd-radio v-model="radio1" label="wind" size="large"></wd-radio>
-    <wd-radio v-model="radio1" label="sky" size="large"></wd-radio>
+    <wd-checkbox v-model="value1" label="wind" size="large"></wd-checkbox>
+    <wd-checkbox v-model="value2" label="sky" size="large"></wd-checkbox>
   </div>
-
   <div>
-    <wd-radio v-model="radio2" label="wind"></wd-radio>
-    <wd-radio v-model="radio2" label="sky"></wd-radio>
+    <wd-checkbox v-model="value3" label="wind"></wd-checkbox>
+    <wd-checkbox v-model="value4" label="sky"></wd-checkbox>
   </div>
-
   <div>
-    <wd-radio v-model="radio3" label="wind" size="small"></wd-radio>
-    <wd-radio v-model="radio3" label="sky" size="small"></wd-radio>
-  </div>
-
-  <!-- disabled -->
-  <div>
-    <wd-radio v-model="radio4" label="wind"></wd-radio>
-    <wd-radio
-      v-model="radio4"
-      label="sky"
-      :disabled="disabled"
-      @change="onChangeRadio"
-    ></wd-radio>
-    <wd-switch v-model="disabled"></wd-switch>
-  </div>
-
-  <!-- wd-radio-group / change / disabled / size -->
-  <div>
-    <wd-radio-group
-      v-model="radio5"
-      :disabled="disabled"
-      size="large"
-      @change="onChangeRadio"
-    >
-      <wd-radio label="wind"></wd-radio>
-      <wd-radio label="sky"></wd-radio>
-    </wd-radio-group>
-  </div>
-
-  <div>
-    <wd-radio-group v-model="radio6">
-      <wd-radio label="wind"></wd-radio>
-      <wd-radio label="sky"></wd-radio>
-    </wd-radio-group>
-  </div>
-
-  <div>
-    <wd-radio-group v-model="radio7" size="small">
-      <wd-radio label="wind"></wd-radio>
-      <wd-radio label="sky"></wd-radio>
-    </wd-radio-group>
-  </div>
-
-  <!-- wd-radio-button / size /  disabled -->
-  <div style="margin-top: 10px">
-    <wd-radio-group
-      v-model="radio6"
-      size="large"
-      :disabled="disabled"
-      @change="onChangeRadio"
-    >
-      <wd-radio-button label="wind"></wd-radio-button>
-      <wd-radio-button label="sky"></wd-radio-button>
-    </wd-radio-group>
-  </div>
-  <div style="margin-top: 10px">
-    <wd-radio-group v-model="radio7">
-      <wd-radio-button label="wind"></wd-radio-button>
-      <wd-radio-button label="sky" :disabled="disabled"></wd-radio-button>
-    </wd-radio-group>
-  </div>
-  <div style="margin-top: 10px">
-    <wd-radio-group v-model="radio8" size="small">
-      <wd-radio-button label="1">1</wd-radio-button>
-      <wd-radio-button label="2">2</wd-radio-button>
-      <wd-radio-button label="3">3</wd-radio-button>
-      <wd-radio-button label="4">4</wd-radio-button>
-    </wd-radio-group>
+    <wd-checkbox v-model="value5" label="wind" size="small"></wd-checkbox>
+    <wd-checkbox v-model="value6" label="sky" size="small"></wd-checkbox>
   </div>
 </template>
 <script lang="ts">
@@ -86,34 +17,21 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const radio1Ref = ref()
-    const radio2Ref = ref()
-    const radio3Ref = ref()
-    const radio4Ref = ref('wind')
-    const radio5Ref = ref()
-    const radio6Ref = ref()
-    const radio7Ref = ref()
-    const radio8Ref = ref()
-    const disabled = ref(false)
-
-    const onChangeRadio: <T>(val: T) => void = (val) => {
-      console.log(val)
-    }
-
-    setTimeout(() => {
-      radio1Ref.value = 'text8'
-    }, 2000)
+    const value1 = ref()
+    const value2 = ref()
+    const value3 = ref()
+    const value4 = ref()
+    const value5 = ref()
+    const value6 = ref()
+    const value7 = ref()
     return {
-      radio1: radio1Ref,
-      radio2: radio2Ref,
-      radio3: radio3Ref,
-      radio4: radio4Ref,
-      radio5: radio5Ref,
-      radio6: radio6Ref,
-      radio7: radio7Ref,
-      radio8: radio8Ref,
-      disabled,
-      onChangeRadio,
+      value1,
+      value2,
+      value3,
+      value4,
+      value5,
+      value6,
+      value7,
     }
   },
 })
