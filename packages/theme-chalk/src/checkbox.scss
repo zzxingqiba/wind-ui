@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'root/var' as *;
+
+$checkbox-box-shadow: inset 0 0 0 1px getCssVar('color-gray-bg');
+$checkbox-box-shadow-active: inset 0 0 0 1px getCssVar('color-primary');
+$checkbox-box-shadow-focus: inset 0 0 0 1px getCssVar('color-primary'),
+  0 0 0 2px rgba(map.get($colors, 'primary', 'base'), 0.2);
+$checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
+
+@include b(checkbox){
+  height: map.get($checkbox-height, 'default');
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: getCssVar('font-size');
+  line-height: 1;
+  margin-right: getCssVar('spacing', 'normal');
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @include e(box-wrapper){
+    height: getCssVar('font-size');
+    width: getCssVar('font-size');
+    border: getCssVar('border');
+    border-radius: getCssVar('border-radius', 'small');
+  }
+
+  @include e(label){
+    padding: 0 getCssVar('spacing', 'small');
+    color: getCssVar('text-color', 'base');
+    transition: color 0.3s getCssVar('bezier');
+  }
+
+  &:hover{
+    .#{$namespace}-checkbox__box-wrapper{
+      border-color: getCssVar('color-success');
+    }
+  }
+}

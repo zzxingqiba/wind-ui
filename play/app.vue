@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ value1 }}
     <wd-checkbox v-model="value1" label="wind" size="large"></wd-checkbox>
     <wd-checkbox v-model="value2" label="sky" size="large"></wd-checkbox>
   </div>
@@ -17,8 +18,8 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const value1 = ref()
-    const value2 = ref()
+    const value1 = ref(false)
+    const value2 = ref(false)
     const value3 = ref()
     const value4 = ref()
     const value5 = ref()

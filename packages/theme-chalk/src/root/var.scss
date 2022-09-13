@@ -195,3 +195,7 @@ $switch: map.merge(
 // Radio
 $radio-height: () !default;
 $radio-height: map.merge($common-size, $radio-height);
+
+// Checkbox
+$checkbox-height: () !default;
+$checkbox-height: map.merge($common-size, $checkbox-height);
