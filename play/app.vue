@@ -1,31 +1,52 @@
 <template>
   <div>
-    {{ value1 }}
-    <wd-checkbox v-model="value1" label="wind" size="large"></wd-checkbox>
+    <wd-checkbox
+      v-model="value1"
+      true-label="wind"
+      false-label="sky"
+      size="large"
+      :disabled="disabled"
+      @change="handleChange"
+      >wind</wd-checkbox
+    >
     <wd-checkbox v-model="value2" label="sky" size="large"></wd-checkbox>
+    <wd-switch v-model="disabled" size="large"></wd-switch>
   </div>
   <div>
-    <wd-checkbox v-model="value3" label="wind"></wd-checkbox>
-    <wd-checkbox v-model="value4" label="sky"></wd-checkbox>
+    <wd-checkbox v-model="value3" label="wind">wind1</wd-checkbox>
+    <wd-checkbox v-model="value4" label="sky">sky2</wd-checkbox>
   </div>
   <div>
     <wd-checkbox v-model="value5" label="wind" size="small"></wd-checkbox>
     <wd-checkbox v-model="value6" label="sky" size="small"></wd-checkbox>
   </div>
+  <div>
+    <wd-checkbox-group v-model="value7">
+      <wd-checkbox label="wind"></wd-checkbox>
+      <wd-checkbox label="sky"></wd-checkbox>
+    </wd-checkbox-group>
+  </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const value1 = ref(false)
+    const disabled = ref(false)
+    const value1 = ref()
     const value2 = ref(false)
     const value3 = ref()
     const value4 = ref()
     const value5 = ref()
     const value6 = ref()
-    const value7 = ref()
+    const value7 = reactive([])
+    const handleChange = (val: any) => {
+      console.log(val)
+    }
+
     return {
+      handleChange,
+      disabled,
       value1,
       value2,
       value3,

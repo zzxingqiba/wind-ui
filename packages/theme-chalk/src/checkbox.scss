@@ -4,12 +4,12 @@
 @use 'root/var' as *;
 
 $checkbox-box-shadow: inset 0 0 0 1px getCssVar('color-gray-bg');
-$checkbox-box-shadow-active: inset 0 0 0 1px getCssVar('color-primary');
-$checkbox-box-shadow-focus: inset 0 0 0 1px getCssVar('color-primary'),
-  0 0 0 2px rgba(map.get($colors, 'primary', 'base'), 0.2);
+$checkbox-box-shadow-active: inset 0 0 0 1px getCssVar('color-success');
+$checkbox-box-shadow-focus: inset 0 0 0 1px getCssVar('color-success'),
+  0 0 0 2px rgba(map.get($colors, 'success', 'base'), 0.2);
 $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
 
-@include b(checkbox){
+@include b(checkbox) {
   height: map.get($checkbox-height, 'default');
   position: relative;
   display: inline-flex;
@@ -18,27 +18,90 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   font-size: getCssVar('font-size');
   line-height: 1;
   margin-right: getCssVar('spacing', 'normal');
+  vertical-align: middle;
 
   &:last-child {
     margin-right: 0;
   }
 
-  @include e(box-wrapper){
+  @include e(box-wrapper) {
     height: getCssVar('font-size');
     width: getCssVar('font-size');
-    border: getCssVar('border');
+    box-shadow: $checkbox-box-shadow;
     border-radius: getCssVar('border-radius', 'small');
+    background-color: getCssVar('color-white');
+    transition: box-shadow 0.3s getCssVar('bezier'), background-color 0.3s getCssVar('bezier');;
   }
 
-  @include e(label){
+  @include e(label) {
     padding: 0 getCssVar('spacing', 'small');
     color: getCssVar('text-color', 'base');
     transition: color 0.3s getCssVar('bezier');
+    user-select: none;
   }
 
-  &:hover{
-    .#{$namespace}-checkbox__box-wrapper{
-      border-color: getCssVar('color-success');
+  &:hover {
+    .#{$namespace}-checkbox__box-wrapper {
+      box-shadow: $checkbox-box-shadow-active;
+    }
+  }
+
+  @include e(check-icon) {
+    fill: getCssVar('color-white');
+    opacity: 0;
+    transform: scale(0.5);
+    transform-origin: center;
+    transition:
+      fill 0.3s getCssVar('bezier'),
+      transform 0.3s getCssVar('bezier'),
+      opacity 0.3s getCssVar('bezier'),
+  }
+
+  &:focus:not(:active) {
+    &.is-checked {
+      .#{$namespace}-checkbox__box-wrapper {
+        box-shadow: $checkbox-box-shadow-focus;
+      }
+    }
+  }
+  @include when(checked){
+    .#{$namespace}-checkbox__box-wrapper {
+      background-color: getCssVar('color-success');
+      box-shadow: $checkbox-box-shadow-active;
+    }
+    .#{$namespace}-checkbox__check-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @include when(disabled){
+    cursor: not-allowed;
+    .#{$namespace}-checkbox__box-wrapper {
+      box-shadow: $checkbox-box-shadow-disabled;
+      background-color: getCssVar('color-disabled-bg');
+    }
+    .#{$namespace}-checkbox__label{
+      color: getCssVar('text-color', 'disabled');
+    }
+    .#{$namespace}-checkbox__check-icon{
+      fill: getCssVar('text-color', 'disabled');
+    }
+    &:hover {
+      .#{$namespace}-checkbox__box-wrapper {
+        box-shadow: $checkbox-box-shadow;
+      }
+    }
+  }
+
+  @each $size in (small, large) {
+    &.#{$namespace}-checkbox--#{$size} {
+      height: map.get($checkbox-height, $size);
+      font-size: getCssVar('font-size', $size);
+      .#{$namespace}-checkbox__box-wrapper{
+        height: getCssVar('font-size', $size);
+        width: getCssVar('font-size', $size);
+      }
     }
   }
 }
