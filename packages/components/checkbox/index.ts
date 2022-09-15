@@ -9,6 +9,6 @@ export const WdCheckboxGroup = withInstall(CheckboxGroup)
 export const WdCheckboxButton = withInstall(CheckboxButton)
 export default WdCheckbox
 
-// export * from './src/checkbox'
-// export * from './src/checkbox-group'
-// export * from './src/checkbox-button'
+export * from './src/checkbox'
+export * from './src/checkbox-group'
+export * from './src/checkbox-button'

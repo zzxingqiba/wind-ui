@@ -4,9 +4,9 @@
 @use 'root/var' as *;
 
 $checkbox-box-shadow: inset 0 0 0 1px getCssVar('color-gray-bg');
-$checkbox-box-shadow-active: inset 0 0 0 1px getCssVar('color-success');
-$checkbox-box-shadow-focus: inset 0 0 0 1px getCssVar('color-success'),
-  0 0 0 2px rgba(map.get($colors, 'success', 'base'), 0.2);
+$checkbox-box-shadow-active: inset 0 0 0 1px getCssVar('color-primary');
+$checkbox-box-shadow-focus: inset 0 0 0 1px getCssVar('color-primary'),
+  0 0 0 2px rgba(map.get($colors, 'primary', 'base'), 0.2);
 $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
 
 @include b(checkbox) {
@@ -19,6 +19,7 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   line-height: 1;
   margin-right: getCssVar('spacing', 'normal');
   vertical-align: middle;
+  cursor: pointer;
 
   &:last-child {
     margin-right: 0;
@@ -66,7 +67,7 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
   }
   @include when(checked){
     .#{$namespace}-checkbox__box-wrapper {
-      background-color: getCssVar('color-success');
+      background-color: getCssVar('color-primary');
       box-shadow: $checkbox-box-shadow-active;
     }
     .#{$namespace}-checkbox__check-icon {
@@ -104,4 +105,11 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
       }
     }
   }
+}
+
+@include b(checkbox-group) {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0;
 }

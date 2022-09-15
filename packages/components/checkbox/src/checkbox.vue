@@ -28,64 +28,37 @@
 </template>
 
 <script lang="ts">
-import { Event } from '@wind/constants'
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useNamespace } from '@wind/hooks/use-namespace'
-import { checkboxProps, checkEmits } from './checkbox'
-import { createInjectionKey } from '@wind/utils'
-import { checkboxGroupApiInjectionKey } from './context'
-import type { CheckboxGroupInjection } from './checkbox-group'
+import { checkboxProps, checkboxEmits } from './checkbox'
+import {
+  useInject,
+  useDisabled,
+  useSize,
+  useChecked,
+  useToggle,
+} from './context'
+
 export default defineComponent({
   name: 'WdCheckbox',
   props: checkboxProps,
-  emit: checkEmits,
-  setup(props, { emit }) {
+  emit: checkboxEmits,
+  setup(props) {
     const ns = useNamespace('checkbox')
-
     const checkboxKls = computed(() => [
       ns.b(),
       ns.m(mergeSize.value),
       ns.is('checked', mergeChecked.value),
       ns.is('disabled', mergeDisabled.value),
     ])
-
-    const checkboxGroup = inject(
-      createInjectionKey<CheckboxGroupInjection>(checkboxGroupApiInjectionKey),
-      null
-    )
-
     const checkIconKls = computed(() => [ns.e('check-icon')])
     const labelKls = computed(() => [ns.e('label')])
     const boxWrapperKls = computed(() => [ns.e('box-wrapper')])
 
-    const mergeChecked = computed(() => {
-      return props.modelValue === (props.trueLabel ?? true)
-    })
-
-    const mergeSize = computed(() => {
-      if (props.size) return props.size
-      if (checkboxGroup) return checkboxGroup.mergedSizeRef.value
-      return ''
-    })
-
-    const mergeDisabled = computed(() => {
-      if (props.disabled) return props.disabled
-      if (checkboxGroup) return checkboxGroup.disabledRef.value
-      return false
-    })
-
-    const toggle = () => {
-      if (mergeDisabled.value) return
-      const nextChecked = mergeChecked.value
-        ? props.falseLabel ?? false
-        : props.trueLabel ?? true
-      emit(Event.UPDATE_MODEL_EVENT, nextChecked)
-      emit(Event.CHANGE_EVENT, nextChecked)
-    }
-
-    const handleClick = () => {
-      toggle()
-    }
+    const checkboxGroup = useInject()
+    const mergeSize = useSize(props, checkboxGroup)
+    const mergeDisabled = useDisabled(props, checkboxGroup)
+    const mergeChecked = useChecked(props, checkboxGroup)
 
     return {
       checkboxKls,
@@ -94,7 +67,11 @@ export default defineComponent({
       labelKls,
       mergeChecked,
       mergeDisabled,
-      handleClick,
+      handleClick: useToggle(props, {
+        mergeDisabled,
+        checkboxGroup,
+        mergeChecked,
+      }),
     }
   },
 })

@@ -1,10 +1,10 @@
-import type { ExtractPropTypes, Ref } from 'vue'
+import type { ExtractPropTypes, Ref, ComputedRef } from 'vue'
 import { componentSizes, Event } from '@wind/constants'
 import { definePropType } from '@wind/utils'
 
 export const checkboxGroupProps = {
   modelValue: {
-    type: definePropType<Array<string | number>>([Array]),
+    type: definePropType<Array<string | number>>(Array),
     default: () => [],
   },
   size: {
@@ -15,16 +15,16 @@ export const checkboxGroupProps = {
   disabled: Boolean,
 }
 
-export const radioGroupEmits = {
+export const checkboxGroupEmits = {
   [Event.UPDATE_MODEL_EVENT]: <T>(value: T) => value,
   [Event.CHANGE_EVENT]: <T>(value: T) => value,
 }
 
 export interface CheckboxGroupInjection {
-  modelValueRef: Ref<Array<string | number>>
+  valueSetRef: ComputedRef<Set<string | number>>
   mergedSizeRef: Ref<CheckboxGroupProps['size']>
   disabledRef: Ref<boolean>
-  UpdateValue: (value: Array<string | number>) => void
+  toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
 }
 
 export type CheckboxGroupProps = ExtractPropTypes<typeof checkboxGroupProps>

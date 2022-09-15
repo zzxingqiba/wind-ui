@@ -13,12 +13,7 @@ export const checkboxProps = {
     default: undefined,
   },
   label: {
-    type: definePropType<string | number | boolean | object>([
-      String,
-      Number,
-      Boolean,
-      Object,
-    ]),
+    type: definePropType<string | number>([String, Number]),
     default: '',
   },
   trueLabel: {
@@ -36,11 +31,11 @@ export const checkboxProps = {
   disabled: Boolean,
 }
 
-export const checkEmits = {
+export const checkboxEmits = {
   [Event.UPDATE_MODEL_EVENT]: <T>(value: T) => value,
   [Event.CHANGE_EVENT]: <T>(value: T) => value,
 }
 
-export type CheckBoxEmits = typeof checkEmits
+export type CheckBoxEmits = typeof checkboxEmits
 
 export type CheckBoxProps = ExtractPropTypes<typeof checkboxProps>
