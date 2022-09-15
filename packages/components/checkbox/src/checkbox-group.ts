@@ -13,6 +13,8 @@ export const checkboxGroupProps = {
     required: false,
   },
   disabled: Boolean,
+  max: Number,
+  min: Number,
 }
 
 export const checkboxGroupEmits = {

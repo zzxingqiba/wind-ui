@@ -31,7 +31,8 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     box-shadow: $checkbox-box-shadow;
     border-radius: getCssVar('border-radius', 'small');
     background-color: getCssVar('color-white');
-    transition: box-shadow 0.3s getCssVar('bezier'), background-color 0.3s getCssVar('bezier');;
+    transition: box-shadow 0.3s getCssVar('bezier'),
+      background-color 0.3s getCssVar('bezier');
   }
 
   @include e(label) {
@@ -52,10 +53,8 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     opacity: 0;
     transform: scale(0.5);
     transform-origin: center;
-    transition:
-      fill 0.3s getCssVar('bezier'),
-      transform 0.3s getCssVar('bezier'),
-      opacity 0.3s getCssVar('bezier'),
+    transition: fill 0.3s getCssVar('bezier'),
+      transform 0.3s getCssVar('bezier'), opacity 0.3s getCssVar('bezier');
   }
 
   &:focus:not(:active) {
@@ -65,7 +64,7 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
       }
     }
   }
-  @include when(checked){
+  @include when(checked) {
     .#{$namespace}-checkbox__box-wrapper {
       background-color: getCssVar('color-primary');
       box-shadow: $checkbox-box-shadow-active;
@@ -76,16 +75,16 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     }
   }
 
-  @include when(disabled){
+  @include when(disabled) {
     cursor: not-allowed;
     .#{$namespace}-checkbox__box-wrapper {
       box-shadow: $checkbox-box-shadow-disabled;
       background-color: getCssVar('color-disabled-bg');
     }
-    .#{$namespace}-checkbox__label{
+    .#{$namespace}-checkbox__label {
       color: getCssVar('text-color', 'disabled');
     }
-    .#{$namespace}-checkbox__check-icon{
+    .#{$namespace}-checkbox__check-icon {
       fill: getCssVar('text-color', 'disabled');
     }
     &:hover {
@@ -99,7 +98,7 @@ $checkbox-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     &.#{$namespace}-checkbox--#{$size} {
       height: map.get($checkbox-height, $size);
       font-size: getCssVar('font-size', $size);
-      .#{$namespace}-checkbox__box-wrapper{
+      .#{$namespace}-checkbox__box-wrapper {
         height: getCssVar('font-size', $size);
         width: getCssVar('font-size', $size);
       }
