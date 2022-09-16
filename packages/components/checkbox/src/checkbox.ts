@@ -29,6 +29,7 @@ export const checkboxProps = {
     default: undefined,
   },
   disabled: Boolean,
+  indeterminate: Boolean,
 }
 
 export const checkboxEmits = {

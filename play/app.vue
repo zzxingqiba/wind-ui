@@ -73,10 +73,28 @@
     {{ value8 }}
   </div>
 
+  <!-- 中间状态 -->
+  <div>
+    <wd-checkbox
+      v-model="value9"
+      :indeterminate="indeterminate"
+      label="全选"
+      @change="changeAll"
+    />
+    <wd-checkbox-group v-model="value10">
+      <wd-checkbox-button label="wind"></wd-checkbox-button>
+      <wd-checkbox-button label="sky"></wd-checkbox-button>
+      <wd-checkbox-button label="night"></wd-checkbox-button>
+      <wd-checkbox-button label="star"></wd-checkbox-button>
+      <wd-checkbox-button label="sun"></wd-checkbox-button>
+    </wd-checkbox-group>
+    {{ value10 }}
+  </div>
+
   <!-- 可选项目数量的限制 -->
   <div>
     <wd-checkbox-group
-      v-model="value9"
+      v-model="value11"
       :min="1"
       :max="3"
       @change="handleChange"
@@ -90,7 +108,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
   setup() {
@@ -103,13 +121,29 @@ export default defineComponent({
     const value6 = ref()
     const value7 = ref([])
     const value8 = ref([])
-    const value9 = ref([])
+    const value9 = ref()
+    const value10 = ref<Array<string>>([])
+    const value11 = ref([])
     const handleChange = (val: any) => {
       console.log(val)
     }
+    const indeterminate = ref(true)
+    const changeAll = (val: any) => {
+      value10.value = val ? ['wind', 'sky', 'night', 'star', 'sun'] : []
+    }
+
+    watch(
+      () => value10.value,
+      () => {
+        indeterminate.value = value10.value?.length == 5 ? false : true
+        value9.value = value10.value?.length ? true : false
+      }
+    )
 
     return {
       handleChange,
+      changeAll,
+      indeterminate,
       disabled,
       value1,
       value2,
@@ -120,6 +154,8 @@ export default defineComponent({
       value7,
       value8,
       value9,
+      value10,
+      value11,
     }
   },
 })
