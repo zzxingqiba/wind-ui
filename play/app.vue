@@ -1,71 +1,96 @@
 <template>
+  <!-- 默认为Boolean值 label为文本显示 -->
+  <div>
+    <wd-checkbox v-model="value1" label="wind" />
+  </div>
+  <!-- 自定义值 -->
   <div>
     <wd-checkbox
-      v-model="value1"
+      v-model="value2"
+      label="wind"
       true-label="wind"
       false-label="sky"
-      size="large"
-      :disabled="disabled"
-      @change="handleChange"
-      >wind</wd-checkbox
-    >
-    <wd-checkbox v-model="value2" label="sky" size="large"></wd-checkbox>
-    <wd-switch v-model="disabled" size="large"></wd-switch>
+    />
   </div>
+  <!-- size: large / default / small -->
   <div>
-    <wd-checkbox v-model="value3" label="wind">wind1</wd-checkbox>
-    <wd-checkbox v-model="value4" label="sky">sky2</wd-checkbox>
-  </div>
-  <div>
-    <wd-checkbox v-model="value5" label="wind" size="small"></wd-checkbox>
-    <wd-checkbox v-model="value6" label="sky" size="small"></wd-checkbox>
+    <wd-checkbox v-model="value3" label="wind" size="large" />
+    <wd-checkbox v-model="value4" label="sky" />
+    <wd-checkbox v-model="value5" label="night" size="small" />
   </div>
 
+  <!-- 受控状态 -->
   <div>
-    <wd-checkbox-group v-model="value7.a" size="large" disabled>
+    <wd-checkbox v-model="value6" label="wind" :disabled="disabled" />
+    <wd-switch v-model="disabled"></wd-switch>
+  </div>
+
+  <!-- 多选框组 -->
+  <div>
+    <wd-checkbox-group v-model="value7" size="large">
       <wd-checkbox label="wind"></wd-checkbox>
       <wd-checkbox label="sky"></wd-checkbox>
       <wd-checkbox label="night"></wd-checkbox>
     </wd-checkbox-group>
   </div>
   <div>
-    <wd-checkbox-group v-model="value7.a">
+    <wd-checkbox-group v-model="value7">
       <wd-checkbox label="wind"></wd-checkbox>
       <wd-checkbox label="sky"></wd-checkbox>
       <wd-checkbox label="night"></wd-checkbox>
     </wd-checkbox-group>
   </div>
   <div>
-    <wd-checkbox-group v-model="value7.a" size="small">
+    <wd-checkbox-group v-model="value7" size="small">
       <wd-checkbox label="wind"></wd-checkbox>
       <wd-checkbox label="sky"></wd-checkbox>
       <wd-checkbox label="night"></wd-checkbox>
     </wd-checkbox-group>
+    {{ value7 }}
   </div>
-  <div style="margin-bottom: 10px">
-    <wd-checkbox-group v-model="value7.a" size="large">
+
+  <!-- 多选框组(按钮样式) -->
+  <div>
+    <wd-checkbox-group v-model="value8" size="large">
       <wd-checkbox-button label="wind"></wd-checkbox-button>
       <wd-checkbox-button label="sky"></wd-checkbox-button>
       <wd-checkbox-button label="night"></wd-checkbox-button>
     </wd-checkbox-group>
   </div>
-  <div style="margin-bottom: 10px">
-    <wd-checkbox-group v-model="value7.a" disabled>
+  <div>
+    <wd-checkbox-group v-model="value8">
       <wd-checkbox-button label="wind"></wd-checkbox-button>
       <wd-checkbox-button label="sky"></wd-checkbox-button>
       <wd-checkbox-button label="night"></wd-checkbox-button>
     </wd-checkbox-group>
   </div>
-  <div style="margin-bottom: 10px">
-    <wd-checkbox-group v-model="value7.a" size="small">
+  <div>
+    <wd-checkbox-group v-model="value8" size="small">
       <wd-checkbox-button label="wind"></wd-checkbox-button>
       <wd-checkbox-button label="sky"></wd-checkbox-button>
       <wd-checkbox-button label="night"></wd-checkbox-button>
+    </wd-checkbox-group>
+    {{ value8 }}
+  </div>
+
+  <!-- 可选项目数量的限制 -->
+  <div>
+    <wd-checkbox-group
+      v-model="value9"
+      :min="1"
+      :max="3"
+      @change="handleChange"
+    >
+      <wd-checkbox-button label="wind"></wd-checkbox-button>
+      <wd-checkbox-button label="sky"></wd-checkbox-button>
+      <wd-checkbox-button label="night"></wd-checkbox-button>
+      <wd-checkbox-button label="star"></wd-checkbox-button>
+      <wd-checkbox-button label="sun"></wd-checkbox-button>
     </wd-checkbox-group>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
@@ -76,9 +101,9 @@ export default defineComponent({
     const value4 = ref()
     const value5 = ref()
     const value6 = ref()
-    const value7 = reactive({
-      a: [],
-    })
+    const value7 = ref([])
+    const value8 = ref([])
+    const value9 = ref([])
     const handleChange = (val: any) => {
       console.log(val)
     }
@@ -93,6 +118,8 @@ export default defineComponent({
       value5,
       value6,
       value7,
+      value8,
+      value9,
     }
   },
 })

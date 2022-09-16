@@ -18,11 +18,27 @@ export const useInject = () => {
 
 export const useDisabled = (
   props: CheckBoxProps,
-  checkboxGroup: CheckboxGroupInjection | null
+  {
+    checkboxGroup,
+    mergeChecked,
+  }: {
+    checkboxGroup: CheckboxGroupInjection | null
+    mergeChecked: ComputedRef<boolean>
+  }
 ) => {
   return computed(() => {
     if (props.disabled) return props.disabled
-    if (checkboxGroup) return checkboxGroup.disabledRef.value
+    if (checkboxGroup) {
+      return (
+        checkboxGroup.disabledRef.value ||
+        (!!checkboxGroup.max.value &&
+          checkboxGroup.max.value <= checkboxGroup.valueSetRef.value.size &&
+          !mergeChecked.value) ||
+        (!!checkboxGroup.min.value &&
+          checkboxGroup.min.value >= checkboxGroup.valueSetRef.value.size &&
+          mergeChecked.value)
+      )
+    }
     return false
   })
 }

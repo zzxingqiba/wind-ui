@@ -23,6 +23,8 @@ export const checkboxGroupEmits = {
 }
 
 export interface CheckboxGroupInjection {
+  max: Ref<number | undefined>
+  min: Ref<number | undefined>
   valueSetRef: ComputedRef<Set<string | number>>
   mergedSizeRef: Ref<CheckboxGroupProps['size']>
   disabledRef: Ref<boolean>

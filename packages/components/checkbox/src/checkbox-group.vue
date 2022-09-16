@@ -27,6 +27,8 @@ export default defineComponent({
       createInjectionKey<CheckboxGroupInjection>(checkboxGroupApiInjectionKey),
       {
         valueSetRef,
+        max: toRef(props, 'max'),
+        min: toRef(props, 'min'),
         mergedSizeRef: toRef(props, 'size'),
         disabledRef: toRef(props, 'disabled'),
         toggleCheckbox: (checked, checkboxValue) => {

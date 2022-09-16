@@ -57,8 +57,8 @@ export default defineComponent({
 
     const checkboxGroup = useInject()
     const mergeSize = useSize(props, checkboxGroup)
-    const mergeDisabled = useDisabled(props, checkboxGroup)
     const mergeChecked = useChecked(props, checkboxGroup)
+    const mergeDisabled = useDisabled(props, { checkboxGroup, mergeChecked })
 
     return {
       checkboxKls,
