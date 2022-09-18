@@ -1,0 +1,150 @@
+@use 'sass:map';
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'root/var' as *;
+
+@include b(timeline-item) {
+  position: relative;
+
+  &:last-child {
+    .#{$namespace}-timeline-item__tail {
+      display: none;
+    }
+  }
+
+  @include e(node) {
+    position: absolute;
+    top: calc(
+      (getCssVar('font-size', 'medium') * 1.25 - getCssVar('font-size'))
+    );
+    left: 0;
+    height: 100%;
+  }
+
+  @include e(tail) {
+    transition: background-color 0.3s getCssVar('bezier');
+    position: absolute;
+    top: getCssVar('font-size');
+    left: calc(getCssVar('font-size') / 2 - 1px);
+    bottom: 0px;
+    width: 2px;
+    background-color: getCssVar('color-gray-bg');
+    @include when(dashed) {
+      background-color: transparent;
+      background-size: 2px getCssVar('spacing', 'normal');
+      background-image: linear-gradient(
+        180deg,
+        getCssVar('color-gray-bg'),
+        getCssVar('color-gray-bg') 50%,
+        transparent 50%,
+        transparent 100%
+      );
+    }
+  }
+
+  @include e(circle) {
+    border: getCssVar('border');
+    border-color: getCssVar('color-gray-bg');
+    color: getCssVar('color-gray-bg');
+    border-width: 2px;
+    transition: background-color 0.3s getCssVar('bezier'),
+      border-color 0.3s getCssVar('bezier');
+    width: getCssVar('font-size');
+    height: getCssVar('font-size');
+    border-radius: getCssVar('font-size');
+    box-sizing: border-box;
+  }
+
+  @include e(icon) {
+    color: getCssVar('color-gray-bg');
+    font-size: getCssVar('font-size');
+    width: getCssVar('font-size');
+    height: getCssVar('font-size');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include e(wrapper) {
+    margin-left: calc(getCssVar('font-size') + getCssVar('spacing', 'normal'));
+  }
+
+  @include e(title) {
+    font-size: getCssVar('font-size', 'large');
+    margin-bottom: getCssVar('spacing', 'small');
+  }
+
+  @include e(content) {
+    font-size: getCssVar('font-size');
+    margin-bottom: getCssVar('spacing', 'small');
+  }
+
+  @include e(time) {
+    color: getCssVar('text-color', 'meta');
+    font-size: getCssVar('font-size', 'small');
+    margin-bottom: getCssVar('spacing', 'large');
+  }
+
+  @each $type in (primary, success, warning, error, info) {
+    @include m($type) {
+      .#{$namespace}-timeline-item__circle {
+        border-color: getCssVar('color', $type);
+        color: getCssVar('color', $type);
+      }
+      .#{$namespace}-timeline-item__icon {
+        color: getCssVar('color', $type);
+      }
+    }
+  }
+}
+
+@include b(timeline) {
+  @include m(horizontal) {
+    .#{$namespace}-timeline-item {
+      flex-shrink: 0;
+      padding-right: getCssVar('spacing', 'huge');
+    }
+    .#{$namespace}-timeline-item__node {
+      width: 100%;
+    }
+    .#{$namespace}-timeline-item__tail {
+      width: unset;
+      height: 2px;
+      left: getCssVar('font-size');
+      right: 0;
+      top: calc(getCssVar('font-size') / 2 - 1px);
+      @include when(dashed) {
+        background-color: transparent;
+        background-size: getCssVar('spacing', 'normal') 2px;
+        background-image: linear-gradient(
+          90deg,
+          getCssVar('color-gray-bg'),
+          getCssVar('color-gray-bg') 50%,
+          transparent 50%,
+          transparent 100%
+        );
+      }
+    }
+    .#{$namespace}-timeline-item__wrapper {
+      margin-top: calc(getCssVar('font-size') + getCssVar('spacing', 'normal'));
+      margin-left: 0;
+    }
+  }
+
+  &:not(.w-timeline--horizontal) {
+    .#{$namespace}-timeline-item {
+      @include when(mirror) {
+        .#{$namespace}-timeline-item__node {
+          right: 0;
+          left: auto;
+        }
+        .#{$namespace}-timeline-item__wrapper {
+          text-align: right;
+          margin-right: calc(
+            getCssVar('font-size') + getCssVar('spacing', 'normal')
+          );
+        }
+      }
+    }
+  }
+}

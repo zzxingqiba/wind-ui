@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'root/var' as *;
+
+@include b(timeline) {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+
+  @include m(horizontal) {
+    flex-direction: row;
+  }
+}

@@ -1,11 +1,7 @@
 import { createApp } from 'vue'
 import APP from './app.vue'
-import WdCheckbox, {
-  WdCheckboxButton,
-  WdCheckboxGroup,
-} from '@wind/components/checkbox'
-import WdSwitch from '@wind/components/switch'
+import WdTimeline, { WdTimelineItem } from '@wind/components/timeline'
 import '@wind/theme-chalk/src/index.scss'
 const app = createApp(APP)
-app.use(WdCheckbox).use(WdSwitch).use(WdCheckboxGroup).use(WdCheckboxButton)
+app.use(WdTimeline).use(WdTimelineItem)
 app.mount('#app')
