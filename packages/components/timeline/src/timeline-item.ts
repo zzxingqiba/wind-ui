@@ -2,7 +2,6 @@ import type { ExtractPropTypes } from 'vue'
 import { componentTypes } from '@wind/constants'
 
 export const timelineItemProps = {
-  color: String,
   lineType: {
     values: ['solid', 'dashed'],
     default: 'solid',
