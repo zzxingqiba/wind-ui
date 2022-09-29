@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use 'mixins/mixins' as *;
+@use 'mixins/function' as *;
+@use 'root/var' as *;
+
+@include b(input) {
+
+  @include e(prepend){
+
+  }
+
+  @include e(wrapper){
+    
+  }
+
+  @include e(suffix){
+    
+  }
+
+  @include e(append){
+    
+  }
+
+
+}
