@@ -11,9 +11,11 @@
       </span>
       <input
         ref="selfRef"
+        :class="inputInnerKls"
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :readonly="readonly"
         :placeholder="placeholder"
+        :disabled="disabled"
         @compositionstart="handleCompositionStart"
         @compositionupdate="handleCompositionUpdate"
         @compositionend="handleCompositionEnd"
@@ -28,14 +30,14 @@
       </span>
     </div>
     <!-- append slot -->
-    <div :class="inputAppendKls">
+    <div v-if="$slots.append" :class="inputAppendKls">
       <slot name="append" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, nextTick } from 'vue'
+import { defineComponent, ref, nextTick, computed, watch, onMounted } from 'vue'
 import { useNamespace } from '@wind/hooks/use-namespace'
 import { inputProps, inputEmits } from './input'
 import type { TargetElement } from './input'
@@ -44,19 +46,42 @@ export default defineComponent({
   name: 'WdInput',
   props: inputProps,
   emits: inputEmits,
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const ns = useNamespace('input')
-    const inputKls = [ns.b()]
-    const inputPrependKls = [ns.e('prepend')]
-    const inputWrapperKls = [ns.e('wrapper')]
-    const inputPrefixKls = [ns.e('prefix')]
-    const inputSuffixKls = [ns.e('suffix')]
-    const inputAppendKls = [ns.e('append')]
 
     const selfRef = ref<HTMLInputElement>()
     const passwordVisible = ref(false)
     const isComposing = ref(false)
     const focused = ref(false)
+
+    const inputKls = [
+      ns.b(),
+      {
+        [ns.b('group')]: slots.prepend || slots.append,
+        [ns.bm('group', 'prepend')]: slots.prepend,
+        [ns.bm('group', 'append')]: slots.append,
+      },
+      ns.is('disabled', props.disabled),
+    ]
+    const inputPrependKls = [ns.e('prepend')]
+    const inputWrapperKls = computed(() => [
+      ns.e('wrapper'),
+      ns.is('focus', focused.value),
+    ])
+    const inputPrefixKls = [ns.e('prefix')]
+    const inputInnerKls = [ns.e('inner')]
+    const inputSuffixKls = [ns.e('suffix')]
+    const inputAppendKls = [ns.e('append')]
+
+    const nativeInputValue = computed(() =>
+      props.modelValue === (undefined || null) ? '' : String(props.modelValue)
+    )
+    const setNativeInputValue = () => {
+      const input = selfRef.value
+      if (!input || input.value === nativeInputValue.value) return
+      input.value = nativeInputValue.value
+    }
+    watch(nativeInputValue, () => setNativeInputValue())
 
     const handleCompositionStart = (event: CompositionEvent) => {
       emit('compositionstart', event)
@@ -80,11 +105,15 @@ export default defineComponent({
       emit(EnumEvent.CHANGE_EVENT, (event.target as TargetElement).value)
     }
 
-    const handleInput = (event: Event) => {
+    const handleInput = async (event: Event) => {
       const { value } = event.target as TargetElement
       if (isComposing.value) return
+      if (value === nativeInputValue.value) return
       emit(EnumEvent.UPDATE_MODEL_EVENT, value)
       emit(EnumEvent.INPUT_EVENT, value)
+
+      await nextTick()
+      setNativeInputValue()
     }
 
     const handleFocus = (event: FocusEvent) => {
@@ -104,6 +133,10 @@ export default defineComponent({
 
     const blur = () => selfRef.value?.blur()
 
+    onMounted(() => {
+      setNativeInputValue()
+    })
+
     return {
       selfRef,
 
@@ -111,6 +144,7 @@ export default defineComponent({
       inputPrependKls,
       inputWrapperKls,
       inputPrefixKls,
+      inputInnerKls,
       inputSuffixKls,
       inputAppendKls,
 

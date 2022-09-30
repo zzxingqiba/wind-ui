@@ -3,23 +3,117 @@
 @use 'mixins/function' as *;
 @use 'root/var' as *;
 
+$input-box-shadow: inset 0 0 0 1px getCssVar('color-gray-bg');
+$input-box-shadow-no-left: inset 0 1px 0 0 getCssVar('color-gray-bg'), inset 0 -1px 0 0 getCssVar('color-gray-bg'), inset -1px 0 0 0 getCssVar('color-gray-bg');
+$input-box-shadow-no-right: inset 1px 0 0 0 getCssVar('color-gray-bg'), inset 0 1px 0 0 getCssVar('color-gray-bg'), inset 0 -1px 0 0 getCssVar('color-gray-bg');
+$input-box-shadow-active: inset 0 0 0 1px getCssVar('color-primary');
+$input-box-shadow-focus: inset 0 0 0 1px getCssVar('color-primary'),
+  0 0 0 2px rgba(map.get($colors, 'primary', 'base'), 0.2);
+$input-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
+
 @include b(input) {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  font-size: getCssVar('font-size');
+  line-height: map.get($input-height, 'default');
 
-  @include e(prepend){
-
+  @include e(prepend) {
+    background-color: getCssVar('color-gray-bg-light');
+    color: getCssVar('text-color', 'base');
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    border-radius: getCssVar('border-radius', 'base');
+    padding: 0 20px;
+    white-space: nowrap;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: $input-box-shadow-no-right;
   }
 
-  @include e(wrapper){
-    
+  @include e(append) {
+    background-color: getCssVar('color-gray-bg-light');
+    color: getCssVar('text-color', 'base');
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    border-radius: getCssVar('border-radius', 'base');
+    padding: 0 20px;
+    white-space: nowrap;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: $input-box-shadow-no-left;
   }
 
-  @include e(suffix){
-    
+  &-group {
+    &--prepend {
+      &>.#{$namespace}-input__wrapper {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+
+    &--append {
+      &>.#{$namespace}-input__wrapper {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
   }
 
-  @include e(append){
-    
+  @include e(wrapper) {
+    display: inline-flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    padding: getCssVar('spacing', 'mini') getCssVar('spacing', 'normal');
+    box-shadow: $input-box-shadow;
+    border-radius: getCssVar('border-radius', 'base');
+    transition: box-shadow 0.3s getCssVar('bezier');
+
+    @include when(focus) {
+      box-shadow: $input-box-shadow-focus;
+      z-index: 2;
+    }
   }
 
+  @include when(disabled) {
+    cursor: not-allowed;
+
+    .#{$namespace}-input__wrapper {
+      background-color: getCssVar('color-gray-bg-light');
+      box-shadow: $input-box-shadow;
+      cursor: not-allowed;
+    }
+
+    .#{$namespace}-input__inner,
+    .#{$namespace}-input__prepend,
+    .#{$namespace}-input__append {
+      color: getCssVar('text-color', 'disabled') !important;
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(inner) {
+    width: 100%;
+    height: calc(map.get($input-height, 'default') - 2px);
+    line-height: calc(map.get($input-height, 'default') - 2px);
+    font-size: inherit;
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    box-sizing: border-box;
+    color: getCssVar('text-color', 'base');
+  }
+
+  @include e(suffix) {}
 
 }

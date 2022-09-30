@@ -4,59 +4,54 @@
 // types
 $types: primary, success, warning, error, info;
 
-$colors: () !default;
-$colors: map.deep-merge(
-  (
-    'white': #ffffff,
-    'black': #000000,
-    'primary': (
-      'base': #4e7ca1,
-      'light-1': #158bb8,
-      'light-2': #8abcd1,
-      'light-3': #baccd9,
-      'dark-1': #277586,
-      'dark-2': #8fb2c9,
+$colors: (
+  ) !default;
+$colors: map.deep-merge(('white': #ffffff,
+      'black': #000000,
+      'primary': ('base': #4e7ca1,
+        'light-1': #158bb8,
+        'light-2': #8abcd1,
+        'light-3': #baccd9,
+        'dark-1': #277586,
+        'dark-2': #8fb2c9,
+      ),
+      'success': ('base': #428675,
+        'light-1': #2c9678,
+        'light-2': #5dbe8a,
+        'light-3': #a4cab6,
+        'dark-1': #248067,
+        'dark-2': #69a794,
+      ),
+      'warning': ('base': #f9a633,
+        'light-1': #feba07,
+        'light-2': #fccb16,
+        'light-3': #f7e8d2,
+        'dark-1': #daa45a,
+        'dark-2': #f5d4a4,
+      ),
+      'error': ('base': #c21f30,
+        'light-1': #de576d,
+        'light-2': #f5dade,
+        'light-3': #f2eaeb,
+        'dark-1': #a7535a,
+        'dark-2': #f0b7bf,
+      ),
+      'info': ('base': #3e3b31,
+        'light-1': #000013,
+        'light-2': #bdbdd0,
+        'light-3': #e1e1f0,
+        'dark-1': #2d2d30,
+        'dark-2': #c3c3cf,
+      ),
     ),
-    'success': (
-      'base': #428675,
-      'light-1': #2c9678,
-      'light-2': #5dbe8a,
-      'light-3': #a4cab6,
-      'dark-1': #248067,
-      'dark-2': #69a794,
-    ),
-    'warning': (
-      'base': #f9a633,
-      'light-1': #feba07,
-      'light-2': #fccb16,
-      'light-3': #f7e8d2,
-      'dark-1': #daa45a,
-      'dark-2': #f5d4a4,
-    ),
-    'error': (
-      'base': #c21f30,
-      'light-1': #de576d,
-      'light-2': #f5dade,
-      'light-3': #f2eaeb,
-      'dark-1': #a7535a,
-      'dark-2': #f0b7bf,
-    ),
-    'info': (
-      'base': #3e3b31,
-      'light-1': #000013,
-      'light-2': #bdbdd0,
-      'light-3': #e1e1f0,
-      'dark-1': #2d2d30,
-      'dark-2': #c3c3cf,
-    ),
-  ),
-  $colors
+    $colors
 );
 
 // Base-Color
 $color-white: #ffffff;
 $color-black: #000000;
 $color-gray-bg: rgb(194, 194, 194);
+$color-gray-bg-light: rgb(245, 247, 250);
 $color-disabled-bg: rgb(250, 250, 252);
 
 // Bezier
@@ -64,140 +59,137 @@ $bezier: cubic-bezier(0, 0, 0.2, 1);
 $bezier-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
 // Text-Color
-$text-color: () !default;
-$text-color: map.merge(
-  (
-    'base': #606266,
-    'disabled': #a8abb2,
-    'meta': #767c82,
-  ),
-  $text-color
+$text-color: (
+  ) !default;
+$text-color: map.merge(('base': #606266,
+      'disabled': #a8abb2,
+      'meta': #767c82,
+    ),
+    $text-color
 );
 
 // Font-Size
-$font-size: () !default;
-$font-size: map.merge(
-  (
-    'mini': 10px,
-    'small': 12px,
-    '': 14px,
-    'medium': 16px,
-    'large': 18px,
-  ),
-  $font-size
+$font-size: (
+  ) !default;
+$font-size: map.merge(('mini': 10px,
+      'small': 12px,
+      '': 14px,
+      'medium': 16px,
+      'large': 18px,
+    ),
+    $font-size
 );
 
 // Font-Weight
-$font-weight: () !default;
-$font-weight: map.merge(
-  (
-    '': 500,
-    'bold': 600,
-  ),
-  $font-weight
+$font-weight: (
+  ) !default;
+$font-weight: map.merge(('': 500,
+      'bold': 600,
+    ),
+    $font-weight
 );
 
 // Border
 $border-width: 1px;
-$border-style: () !default;
-$border-style: map.merge(
-  (
-    'solid': solid,
-    'dashed': dashed,
-  ),
-  $border-style
+$border-style: (
+  ) !default;
+$border-style: map.merge(('solid': solid,
+      'dashed': dashed,
+    ),
+    $border-style
 );
 $border-color: #dcdfe6;
 $border: $border-width map.get($border-style, solid) $border-color;
 
 // Border-Radius
-$border-radius: () !default;
-$border-radius: map.merge(
-  (
-    'small': 2px,
-    'base': 4px,
-    'round': 20px,
-    'circle': 100%,
-  ),
-  $border-radius
+$border-radius: (
+  ) !default;
+$border-radius: map.merge(('small': 2px,
+      'base': 4px,
+      'round': 20px,
+      'circle': 100%,
+    ),
+    $border-radius
 );
 
 // spacing
-$spacing: () !default;
-$spacing: map.merge(
-  (
-    'mini': 1px,
-    'small': 4px,
-    'normal': 8px,
-    'large': 16px,
-    'huge': 20px,
-  ),
-  $spacing
+$spacing: (
+  ) !default;
+$spacing: map.merge(('mini': 1px,
+      'small': 4px,
+      'normal': 8px,
+      'large': 16px,
+      'huge': 20px,
+    ),
+    $spacing
 );
 
 // common-size
-$common-size: () !default;
-$common-size: map.merge(
-  (
-    'large': 40px,
-    'default': 32px,
-    'small': 24px,
-  ),
-  $common-size
+$common-size: (
+  ) !default;
+$common-size: map.merge(('large': 40px,
+      'default': 32px,
+      'small': 24px,
+    ),
+    $common-size
 );
 
 // box-shadow
-$box-shadow: () !default;
-$box-shadow: map.merge(
-  (
-    'gray': (
-      0 0 0 2px getCssVar('color-gray-bg'),
+$box-shadow: (
+  ) !default;
+$box-shadow: map.merge(('gray': (0 0 0 2px getCssVar('color-gray-bg'),
+      ),
+      'primary': (0 0 0 2px getCssVar('color-primary'),
+      ),
     ),
-    'primary': (
-      0 0 0 2px getCssVar('color-primary'),
-    ),
-  ),
-  $box-shadow
+    $box-shadow
 );
 
 // Button
-$button: () !default;
-$button: map.merge(
-  (
-    'text-color': getCssVar('text-color', 'base'),
-    'bg-color': getCssVar('color-white'),
-    'border-color': getCssVar('border-color'),
-    'hover-text-color': getCssVar('color-primary', 'light-1'),
-    'hover-bg-color': getCssVar('color-primary', 'light-3'),
-    'hover-border-color': getCssVar('color-primary', 'light-1'),
-    'active-text-color': getCssVar('color-primary', 'dark-1'),
-    'active-border-color': getCssVar('color-primary', 'dark-1'),
-    'disabled-text-color': getCssVar('text-color', 'disabled'),
-    'disabled-bg-color': getCssVar('color-white'),
-    'disabled-border-color': getCssVar('text-color', 'disabled'),
-  ),
-  $button
+$button: (
+  ) !default;
+$button: map.merge(('text-color': getCssVar('text-color', 'base'),
+      'bg-color': getCssVar('color-white'),
+      'border-color': getCssVar('border-color'),
+      'hover-text-color': getCssVar('color-primary', 'light-1'),
+      'hover-bg-color': getCssVar('color-primary', 'light-3'),
+      'hover-border-color': getCssVar('color-primary', 'light-1'),
+      'active-text-color': getCssVar('color-primary', 'dark-1'),
+      'active-border-color': getCssVar('color-primary', 'dark-1'),
+      'disabled-text-color': getCssVar('text-color', 'disabled'),
+      'disabled-bg-color': getCssVar('color-white'),
+      'disabled-border-color': getCssVar('text-color', 'disabled'),
+    ),
+    $button
 );
 
 // Switch
-$switch: () !default;
-$switch: map.merge(
-  (
-    'on-color': getCssVar('color-primary'),
-    'off-color': getCssVar('color-gray-bg'),
-    'ball-box-shadow': (
-      0 1px 4px 0 rgba(0, 0, 0, 0.3),
-      inset 0 0 1px 0 rgba(0, 0, 0, 0.05),
+$switch: (
+  ) !default;
+$switch: map.merge(('on-color': getCssVar('color-primary'),
+      'off-color': getCssVar('color-gray-bg'),
+      'ball-box-shadow': (0 1px 4px 0 rgba(0, 0, 0, 0.3),
+        inset 0 0 1px 0 rgba(0, 0, 0, 0.05),
+      ),
+      'ball-color': getCssVar('color-white'),
     ),
-    'ball-color': getCssVar('color-white'),
-  ),
-  $switch
+    $switch
 );
 
 // Radio
-$radio-height: () !default;
-$radio-height: map.merge($common-size, $radio-height);
+$radio-height: (
+  ) !default;
+$radio-height: map.merge($common-size, $radio-height
+);
 
 // Checkbox
-$checkbox-height: () !default;
-$checkbox-height: map.merge($common-size, $checkbox-height);
+$checkbox-height: (
+  ) !default;
+$checkbox-height: map.merge($common-size, $checkbox-height
+);
+
+// Input
+$input-height: (
+  ) !default;
+$input-height: map.merge($common-size, $input-height
+);

@@ -7,6 +7,7 @@
   @include set-css-var-value('color-white', $color-white);
   @include set-css-var-value('color-black', $color-black);
   @include set-css-var-value('color-gray-bg', $color-gray-bg);
+  @include set-css-var-value('color-gray-bg-light', $color-gray-bg-light);
   @include set-css-var-value('color-disabled-bg', $color-disabled-bg);
 
   // --el-color-#{$type}
