@@ -25,8 +25,14 @@
         @change="handleChange"
       />
       <!-- suffix slot -->
-      <span :class="inputSuffixKls">
-        <slot name="suffix" />
+      <!--  -->
+      <span v-if="suffixVisible" :class="inputSuffixKls">
+        <template v-if="clearable">
+          <i class="w-icon-xiasanjiao" style="color: #7a69eb" />
+        </template>
+        <template v-else>
+          <slot name="suffix" />
+        </template>
       </span>
     </div>
     <!-- append slot -->
@@ -72,6 +78,17 @@ export default defineComponent({
     const inputInnerKls = [ns.e('inner')]
     const inputSuffixKls = [ns.e('suffix')]
     const inputAppendKls = [ns.e('append')]
+
+    const showClear = computed(
+      () =>
+        props.clearable &&
+        !props.disabled &&
+        !props.readonly &&
+        !!nativeInputValue.value &&
+        focused.value
+    )
+
+    const suffixVisible = computed(() => !!slots.suffix || showClear.value)
 
     const nativeInputValue = computed(() =>
       props.modelValue === (undefined || null) ? '' : String(props.modelValue)
@@ -148,6 +165,7 @@ export default defineComponent({
       inputSuffixKls,
       inputAppendKls,
 
+      suffixVisible,
       passwordVisible,
       handleCompositionStart,
       handleCompositionUpdate,

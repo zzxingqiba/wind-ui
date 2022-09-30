@@ -114,6 +114,25 @@ $input-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     color: getCssVar('text-color', 'base');
   }
 
-  @include e(suffix) {}
+  @include e(suffix) {
+    display: inline-flex;
+    box-sizing: border-box;
+    pointer-events: all;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    height: 100%;
+    text-align: center;
+    color: getCssVar('color-gray-bg');
+    transition: all 0.3s getCssVar('bezier');
+    pointer-events: none;
+    [class^='#{$namespace}-icon']{
+      height: inherit;
+      line-height: inherit;
+      margin-left: getCssVar('spacing', 'normal');
+    }
+  }
 
 }
