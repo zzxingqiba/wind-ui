@@ -69,15 +69,15 @@ $text-color: map.merge(('base': #606266,
 );
 
 // Font-Size
-$font-size: (
-  ) !default;
-$font-size: map.merge(('mini': 10px,
-      'small': 12px,
-      '': 14px,
-      'medium': 16px,
-      'large': 18px,
-    ),
-    $font-size
+$font-size: () !default;
+$font-size: map.merge(
+  (
+    'mini': 10px,
+    'small': 12px,
+    '': 14px,
+    'large': 16px,
+  ),
+  $font-size
 );
 
 // Font-Weight

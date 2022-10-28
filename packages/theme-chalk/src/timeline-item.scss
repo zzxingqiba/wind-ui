@@ -15,7 +15,7 @@
   @include e(node) {
     position: absolute;
     top: calc(
-      (getCssVar('font-size', 'medium') * 1.25 - getCssVar('font-size'))
+      (getCssVar('font-size', 'large') * 1.25 - getCssVar('font-size'))
     );
     left: 0;
     height: 100%;
