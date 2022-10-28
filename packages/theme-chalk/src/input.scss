@@ -127,12 +127,41 @@ $input-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     text-align: center;
     color: getCssVar('color-gray-bg');
     transition: all 0.3s getCssVar('bezier');
-    pointer-events: none;
-    [class^='#{$namespace}-icon']{
+
+    [class^='#{$namespace}-icon'] {
       height: inherit;
       line-height: inherit;
       margin-left: getCssVar('spacing', 'normal');
     }
+
   }
 
+  @include e(icon) {
+    width: 1em;
+    height: 1em;
+    cursor: pointer;
+    color: rgba(getCssVar('color-black'), 0.5);
+    transition: color .3s getCssVar('bezier');
+    display: flex;
+
+    &:hover {
+      color: rgba($color-black, 0.7) !important;
+    }
+
+    &:active {
+      color: rgba($color-black, 0.9) !important;
+    }
+  }
+
+  @each $size in (small, large) {
+    @include m($size) {
+      line-height: map.get($input-height, $size);
+      font-size: getCssVar('font-size', $size);
+
+      .#{$namespace}-input__inner {
+        height: calc(map.get($input-height, $size) - 2px);
+        line-height: calc(map.get($input-height, $size) - 2px);
+      }
+    }
+  }
 }

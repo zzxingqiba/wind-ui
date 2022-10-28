@@ -44,6 +44,8 @@ export const inputEmits = {
   compositionstart: (evt: CompositionEvent) => evt instanceof CompositionEvent,
   compositionupdate: (evt: CompositionEvent) => evt instanceof CompositionEvent,
   compositionend: (evt: CompositionEvent) => evt instanceof CompositionEvent,
+  mouseleave: (evt: MouseEvent) => evt instanceof MouseEvent,
+  mouseenter: (evt: MouseEvent) => evt instanceof MouseEvent,
 }
 
 export type InputEmits = typeof inputEmits
