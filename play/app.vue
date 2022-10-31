@@ -49,6 +49,17 @@
     <wd-input ref="input" v-model="value1" show-password />
   </div>
 
+  <!-- minlength / maxlength / show-word-limit -->
+  <div style="margin-top: 10px">
+    <wd-input
+      ref="input"
+      v-model="value1"
+      :maxlength="10"
+      show-word-limit
+      placeholder="Please input"
+    />
+  </div>
+
   <!-- size -->
   <div>
     <wd-input

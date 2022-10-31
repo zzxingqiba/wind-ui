@@ -30,8 +30,8 @@
       />
       <!-- suffix slot -->
       <div v-if="suffixVisible" :class="inputSuffixKls">
-        <!-- clearable -->
-        <template v-if="clearable">
+        <!-- showClear -->
+        <template v-if="showClear">
           <div :class="inputIconKls" @click="handleClear">
             <svg
               viewBox="0 0 16 16"
@@ -48,8 +48,8 @@
             </svg>
           </div>
         </template>
-        <!-- showPassword -->
-        <template v-else-if="showPassword">
+        <!-- showPwdVisible -->
+        <template v-else-if="showPwdVisible">
           <div :class="inputIconKls" @click="handlePasswordVisible">
             <svg
               v-if="passwordVisible"
@@ -100,6 +100,14 @@
                 fill="currentColor"
               />
             </svg>
+          </div>
+        </template>
+        <!-- showWordLimitVisible -->
+        <template v-else-if="showWordLimitVisible">
+          <div :class="inputCountKls">
+            <span :class="inputCountInnerKls"
+              >{{ textLength }} / {{ maxlength }}</span
+            >
           </div>
         </template>
         <template v-else>
@@ -153,6 +161,8 @@ export default defineComponent({
     const inputSuffixKls = [ns.e('suffix')]
     const inputAppendKls = [ns.e('append')]
     const inputIconKls = [ns.e('icon')]
+    const inputCountKls = [ns.e('count')]
+    const inputCountInnerKls = [ns.e('count-inner')]
 
     const showClear = computed(
       () =>
@@ -163,8 +173,33 @@ export default defineComponent({
         (focused.value || hovering.value)
     )
 
+    const showPwdVisible = computed(
+      () =>
+        props.showPassword &&
+        !props.disabled &&
+        !props.readonly &&
+        !!nativeInputValue.value &&
+        (!!nativeInputValue.value || focused.value)
+    )
+
+    const showWordLimitVisible = computed(
+      () =>
+        props.showWordLimit &&
+        !!props.maxlength &&
+        (props.type === 'text' || props.type === 'textarea') &&
+        !props.disabled &&
+        !props.readonly &&
+        !props.showPassword
+    )
+
+    const textLength = computed(() => Array.from(nativeInputValue.value).length)
+
     const suffixVisible = computed(
-      () => !!slots.suffix || showClear.value || props.showPassword
+      () =>
+        !!slots.suffix ||
+        showClear.value ||
+        props.showPassword ||
+        showWordLimitVisible.value
     )
 
     const nativeInputValue = computed(() =>
@@ -203,6 +238,7 @@ export default defineComponent({
 
     const handleInput = async (event: Event) => {
       const { value } = event.target as TargetElement
+      
       if (isComposing.value) return
       if (value === nativeInputValue.value) return
       emit(EnumEvent.UPDATE_MODEL_EVENT, value)
@@ -266,9 +302,17 @@ export default defineComponent({
       inputSuffixKls,
       inputAppendKls,
       inputIconKls,
+      inputCountKls,
+      inputCountInnerKls,
 
       suffixVisible,
+      showClear,
       passwordVisible,
+      showPwdVisible,
+      showWordLimitVisible,
+
+      textLength,
+
       handleCompositionStart,
       handleCompositionUpdate,
       handleCompositionEnd,
