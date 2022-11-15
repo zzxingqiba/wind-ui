@@ -78,6 +78,10 @@ $input-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     border-radius: getCssVar('border-radius', 'base');
     transition: box-shadow 0.3s getCssVar('bezier');
 
+    &:hover {
+      box-shadow: $input-box-shadow-active;
+    }
+
     @include when(focus) {
       box-shadow: $input-box-shadow-focus;
       z-index: 2;
@@ -147,6 +151,7 @@ $input-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     color: rgba(getCssVar('color-black'), 0.5);
     transition: color .3s getCssVar('bezier');
     font-size: inherit;
+    margin-left: getCssVar('spacing', 'normal');
 
     svg {
       width: 1em;
@@ -187,5 +192,71 @@ $input-box-shadow-disabled: inset 0 0 0 1px getCssVar('color-gray-bg');
     line-height: initial;
     display: inline-block;
     padding-left: 8px;
+  }
+}
+
+@include b(textarea) {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom;
+  font-size: getCssVar('font-size');
+
+  @include when(disabled) {
+    cursor: not-allowed;
+
+    .#{$namespace}-textarea__inner {
+      color: getCssVar('text-color', 'disabled');
+      background-color: getCssVar('color-gray-bg-light');
+      box-shadow: $input-box-shadow;
+      cursor: not-allowed;
+      &:hover {
+        box-shadow: $input-box-shadow;
+      }
+      &:focus {
+        box-shadow: $input-box-shadow;
+      }
+    }
+  }
+
+  @include e(inner) {
+    width: 100%;
+    resize: vertical;
+    box-sizing: border-box;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: 1.4;
+    padding: getCssVar('spacing', 'normal');
+    color: getCssVar('text-color', 'base');
+    background-image: none;
+    border: none;
+    box-shadow: $input-box-shadow;
+    border-radius: getCssVar('border-radius', 'base');
+    transition: box-shadow 0.3s getCssVar('bezier');
+
+    &:hover {
+      box-shadow: $input-box-shadow-active;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: $input-box-shadow-focus;
+      z-index: 2;
+    }
+  }
+
+  @include e(count) {
+    position: absolute;
+    font-size: getCssVar('font-size', 'small');
+    line-height: getCssVar('font-size');
+    bottom: 8px;
+    right: 8px;
+  }
+
+  @include e(count-inner) {
+    color: rgba($color-black, 0.4);
+    background: getCssVar('color-white');
+    line-height: initial;
+    display: inline-block;
   }
 }

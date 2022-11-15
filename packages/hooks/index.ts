@@ -1,3 +1,4 @@
+export * from './use-attrs'
 export * from './use-namespace'
 export * from './use-size'
 export * from './use-prop'

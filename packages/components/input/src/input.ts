@@ -32,8 +32,10 @@ export const inputProps = {
   },
   disabled: Boolean,
   readonly: Boolean,
-  minlength: [String, Number],
-  maxlength: [String, Number],
+  autocomplete: {
+    type: String,
+    default: 'off',
+  },
   showWordLimit: {
     type: Boolean,
     default: false,

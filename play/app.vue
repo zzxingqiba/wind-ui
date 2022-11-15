@@ -54,7 +54,7 @@
     <wd-input
       ref="input"
       v-model="value1"
-      :maxlength="10"
+      :maxlength="maxlength"
       show-word-limit
       placeholder="Please input"
     />
@@ -83,6 +83,42 @@
       size="large"
     />
   </div>
+
+  <!-- textarea -->
+  <div>
+    <wd-input
+      v-model="value1"
+      style="margin-top: 10px"
+      type="textarea"
+      placeholder="Please input"
+      show-word-limit
+      :maxlength="100"
+    />
+  </div>
+  <!-- disabled -->
+  <div>
+    <wd-input
+      v-model="value1"
+      disabled
+      style="margin-top: 10px"
+      type="textarea"
+      placeholder="Please input"
+      show-word-limit
+      :maxlength="100"
+    />
+  </div>
+  <!-- rows -->
+  <div>
+    <wd-input
+      v-model="value1"
+      style="margin-top: 10px"
+      type="textarea"
+      placeholder="Please input"
+      show-word-limit
+      :maxlength="100"
+      :rows="6"
+    />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -91,13 +127,16 @@ export default defineComponent({
   setup() {
     const value1 = ref()
     const input = ref()
+    const maxlength = ref(4)
     const onClick = () => {
       console.log(input.value)
       input.value?.blur()
+      maxlength.value = 12
     }
     return {
       value1,
       input,
+      maxlength,
       onClick,
     }
   },
