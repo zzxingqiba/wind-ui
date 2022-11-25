@@ -27,3 +27,5 @@ export const fromPairs = (pairs: List<any[]>) => {
   }
   return result
 }
+
+export const generateId = (): number => Math.floor(Math.random() * 10000)
